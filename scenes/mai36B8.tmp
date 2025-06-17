@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://hlivv6icx1lg"]
+
+[ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_1ttbb"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_papdv"]
+[ext_resource type="PackedScene" uid="uid://b0ydmypi345ar" path="res://scenes/level/platform/platform.tscn" id="3_5fvt1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
+size = Vector2(573, 45)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_papdv")
+
+[node name="TempFloor" type="StaticBody2D" parent="."]
+position = Vector2(125, 170)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempFloor"]
+shape = SubResource("RectangleShape2D_c1pls")
+
+[node name="Player" parent="." instance=ExtResource("1_1ttbb")]
+position = Vector2(34, 105)
+
+[node name="Platform" parent="." instance=ExtResource("3_5fvt1")]
+position = Vector2(271, 84)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
