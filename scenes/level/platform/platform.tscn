@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0ydmypi345ar"]
+[gd_scene load_steps=3 format=3 uid="uid://b0ydmypi345ar"]
+
+[ext_resource type="Script" path="res://scenes/level/platform/platform.gd" id="1_73hu2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivgxo"]
-size = Vector2(30.425, 6.375)
+size = Vector2(44.86, 6.375)
 
 [node name="Platform" type="RigidBody2D"]
 collision_mask = 0
@@ -9,6 +11,7 @@ mass = 0.001
 gravity_scale = 0.0
 linear_velocity = Vector2(-50, 0)
 linear_damp_mode = 1
+script = ExtResource("1_73hu2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ivgxo")
