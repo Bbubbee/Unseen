@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://swdlvi4px611"]
+[gd_scene load_steps=5 format=3 uid="uid://swdlvi4px611"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_y4u3j"]
+[ext_resource type="PackedScene" uid="uid://bmqdf4kabond7" path="res://components/hurtbox_component/hurtbox.tscn" id="2_shyob"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_re6wi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2pl2u"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -10,5 +13,14 @@ collision_mask = 3
 script = ExtResource("1_y4u3j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_re6wi")
-debug_color = Color(0.230921, 0.613452, 0.498328, 0.42)
+debug_color = Color(0.180027, 0.638579, 0.219221, 0.42)
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_shyob")]
+collision_mask = 4
+
+[node name="Collider" parent="Hurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_2pl2u")
+
+[editable path="Hurtbox"]

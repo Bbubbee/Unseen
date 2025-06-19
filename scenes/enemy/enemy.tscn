@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://draktbxmfqkg5"]
+
+[ext_resource type="PackedScene" uid="uid://b8odsjult6uvb" path="res://components/hitbox_component/hitbox.tscn" id="1_ltfs2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sjdai"]
+radius = 7.07107
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rrneg"]
+radius = 5.09902
+
+[node name="Enemy" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sjdai")
+debug_color = Color(0.900761, 0.29575, 0.256403, 0.42)
+
+[node name="Hitbox" parent="." instance=ExtResource("1_ltfs2")]
+collision_layer = 4
+
+[node name="Collider" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_rrneg")
+
+[editable path="Hitbox"]

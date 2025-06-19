@@ -11,7 +11,10 @@ func init(s: bool = true):
 	self.state = s
 	
 	if not state: 
-		collision_shape.debug_color = Color.RED
+		collision_shape.debug_color = Color.PURPLE
+	else: 
+		collision_shape.debug_color = Color.DEEP_SKY_BLUE
+		
 
 
 func set_visibility(on: bool = true):

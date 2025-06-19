@@ -26,6 +26,7 @@ window/stretch/mode="canvas_items"
 [file_customization]
 
 folder_colors={
+"res://components/": "blue",
 "res://data/": "teal",
 "res://scenes/": "pink",
 "res://utils/": "purple"
@@ -50,6 +51,7 @@ right={
 
 2d_physics/layer_1="world"
 2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
 
 [rendering]
 
