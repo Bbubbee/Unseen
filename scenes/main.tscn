@@ -33,6 +33,6 @@ autostart = true
 position = Vector2(164, 103)
 
 [connection signal="player_jumped" from="Player" to="." method="_on_player_player_jumped"]
-[connection signal="timeout" from="PlatformTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_platform_timer_timeout"]
+[connection signal="timeout" from="PlatformTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
