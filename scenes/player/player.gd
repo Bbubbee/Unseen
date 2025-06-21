@@ -13,8 +13,6 @@ signal player_jumped
 func _physics_process(delta: float) -> void:
 	velocity_component.handle_gravity(delta)
 
-	
-		
 	# Movement
 	var direction = Input.get_axis("left", "right")
 	if direction: velocity_component.move(delta, direction)
@@ -24,7 +22,11 @@ func _physics_process(delta: float) -> void:
 	
 	jump_component.handle_jump()
 	
-	## Handle jump.
-	if Input.is_action_just_pressed("ui_accept"):
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
 		jump_component.try_to_jump()
-		player_jumped.emit()
+
+# The player has successfully jumped! Change realites.
+func _on_jump_component_jumped() -> void:
+	player_jumped.emit()

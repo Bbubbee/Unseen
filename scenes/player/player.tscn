@@ -26,11 +26,14 @@ shape = SubResource("CapsuleShape2D_2pl2u")
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("3_5fbal")]
 actor = NodePath("..")
-acceleration = 1150.0
+acceleration = 1400.0
 friction = 1400.0
 
 [node name="JumpComponent" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("4_p1a2g")]
 actor = NodePath("..")
 jump_force = -400.0
+coyote_time = 0.18
+
+[connection signal="jumped" from="JumpComponent" to="." method="_on_jump_component_jumped"]
 
 [editable path="Hurtbox"]

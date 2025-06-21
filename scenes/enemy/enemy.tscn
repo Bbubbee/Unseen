@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://draktbxmfqkg5"]
+[gd_scene load_steps=5 format=3 uid="uid://draktbxmfqkg5"]
 
+[ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_4oeaf"]
 [ext_resource type="PackedScene" uid="uid://b8odsjult6uvb" path="res://components/hitbox_component/hitbox.tscn" id="1_ltfs2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sjdai"]
@@ -12,8 +13,10 @@ radius = 5.09902
 collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
+linear_damp_mode = 1
+script = ExtResource("1_4oeaf")
 
-[node name="Collider" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sjdai")
 debug_color = Color(0.900761, 0.29575, 0.256403, 0.42)
 

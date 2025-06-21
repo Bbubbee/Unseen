@@ -1,5 +1,5 @@
 extends RigidBody2D
-class_name Platform
+
 
 var reality: bool
 

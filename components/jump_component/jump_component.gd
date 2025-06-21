@@ -9,13 +9,14 @@ class_name JumpComponent
 var can_jump: bool = false
 @onready var buffer_timer = $BufferTimer
 
+signal jumped
+
 
 func _ready():
 	if not actor: set_physics_process(false)
 
 
 ## NOTE: This MUST be called AFTER move_and_slide()
-
 """
 	Requirements: 
 		This must be called in the physics function AFTER move_and_slide()
@@ -29,7 +30,8 @@ func handle_jump():
 	# We have left the floor. 
 	if not actor.is_on_floor() and coyote_timer.is_stopped():
 		coyote_timer.start(coyote_time)
-		
+	
+	# Buffer timer for jump.
 	if not buffer_timer.is_stopped(): 
 		try_to_jump()
 		
@@ -44,20 +46,24 @@ func _on_coyote_timer_timeout():
 		true -> Jump is successful
 		false -> Jump is unsuccessful
 		Use these return values if you want to transition into another state in a state machine. 
+	signal: signal that the player has successfully jumped. 
 """
 func try_to_jump():	
-	print('trying to jump')
 	# Wants to jump.
 	if can_jump: 
 		can_jump = false
 		coyote_timer.stop() 		
-		actor.velocity.y = jump_force
 		buffer_timer.stop()
-		return true
+		actor.velocity.y = jump_force
+		
+		jumped.emit()
+	
+	# Start the buffer timer. 
+	# If the actor hits the ground while the buffer timer is running, it will attempt to jump. 
+	# See handle_jump above. 
 	elif buffer_timer.is_stopped(): 
 		buffer_timer.start()
 	
-	return false 
 
 func second_jump(): 
 	actor.velocity.y = jump_force
