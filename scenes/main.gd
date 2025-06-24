@@ -82,3 +82,11 @@ func get_random_height():
 	
 	
 	
+
+# Increase score
+@onready var score_timer: Timer = $ScoreTimer
+
+func _on_score_timer_timeout() -> void:
+	score_timer.start()
+	Events.increased_score.emit()
+	
