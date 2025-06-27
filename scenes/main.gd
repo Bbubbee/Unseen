@@ -8,6 +8,7 @@ const ENEMY = preload("res://scenes/enemy/enemy.tscn")
 
 var current_reality = true
 var platform_reality = true
+var platform_speed: float = 200
 
 # Nodes.
 @onready var platform_timer: Timer = $PlatformTimer
@@ -28,7 +29,7 @@ func _on_platform_timer_timeout() -> void:
 	# Add platform.
 	platforms.add_child(p)
 	p.init(platform_reality)
-	p.linear_velocity.x = -150
+	p.linear_velocity.x = -platform_speed
 	
 	# Make the platform visible if its it's reality. 
 	if p.reality == current_reality:
@@ -85,8 +86,19 @@ func get_random_height():
 
 # Increase score
 @onready var score_timer: Timer = $ScoreTimer
-
+@onready var ui: CanvasLayer = $UI
 func _on_score_timer_timeout() -> void:
 	score_timer.start()
-	Events.increased_score.emit()
+	ui.increase_score()
+	
+	
+	
+
+
+# Increase difficulty by increasing the speed of the platforms.
+# Add 25 to the speed. 
+func _on_ui_increase_difficulty() -> void:
+	# Cap the speed at 300
+	if platform_speed > 300: return
+	platform_speed = platform_speed + 25 
 	

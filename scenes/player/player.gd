@@ -30,3 +30,8 @@ func _input(event: InputEvent) -> void:
 # The player has successfully jumped! Change realites.
 func _on_jump_component_jumped() -> void:
 	player_jumped.emit()
+
+
+func _on_hurtbox_hit() -> void:
+	velocity.y = -300
+		
