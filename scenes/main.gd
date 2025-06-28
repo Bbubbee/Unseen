@@ -26,19 +26,35 @@ func _on_platform_timer_timeout() -> void:
 	var p = PLATFORM.instantiate() as Platform
 	p.position = Vector2(screen_size.x, rand_y)
 	
+	# Set reality of platform
+	var reality: bool 
+	
+	# Check if there is a previous platform.
+	if not platforms.get_child_count() > 0:
+		# There is not a previous platform. This is the first one. Make the reality true. 
+		reality = true 
+	else: 
+		# There is a previous platform.
+		var previous_platform: Platform = platforms.get_child(platforms.get_child_count()-1)
+		
+		# 80% chance of being the opposite reality.
+		var chance = randi_range(0, 100)
+		if chance > 80: 
+			reality = previous_platform.reality
+		else: 
+			reality = not previous_platform.reality
+	
 	# Add platform.
-	platforms.add_child(p)
-	p.init(platform_reality)
-	p.linear_velocity.x = -platform_speed
+	platforms.add_child(p)	
+	p.init(reality)
+	
+	p.linear_velocity.x = -platform_speed  # Set speed of platform
 	
 	# Make the platform visible if its it's reality. 
 	if p.reality == current_reality:
 		p.set_visibility(true)
 	else:
 		p.set_visibility(false)
-	
-	# Create a platform. Alternate between the two realites. 
-	platform_reality = not platform_reality
 	
 
 func _on_player_player_jumped() -> void:
