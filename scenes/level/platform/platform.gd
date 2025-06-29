@@ -19,3 +19,7 @@ func init(r: bool = true):
 
 func set_visibility(on: bool = true):
 	self.visible = on 
+
+
+func _on_expire_timer_timeout():
+	queue_free()

@@ -30,8 +30,8 @@ shape = SubResource("CapsuleShape2D_2pl2u")
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("3_5fbal")]
 actor = NodePath("..")
-acceleration = 1400.0
-friction = 1400.0
+acceleration = 1800.0
+friction = 1800.0
 
 [node name="JumpComponent" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("4_p1a2g")]
 actor = NodePath("..")

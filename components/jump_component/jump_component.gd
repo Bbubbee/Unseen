@@ -14,6 +14,7 @@ var can_jump_from_ground := false
 
 signal jumped
 
+
 func _ready():
 	if not actor:
 		set_physics_process(false)
@@ -45,6 +46,7 @@ func try_to_jump():
 		buffer_timer.stop()
 		actor.velocity.y = jump_force
 		jumped.emit()
+		return true
 	
 	elif buffer_timer.is_stopped():
 		buffer_timer.start()

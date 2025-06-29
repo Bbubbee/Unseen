@@ -11,19 +11,24 @@ var platform_reality = true
 var platform_speed: float = 200
 
 # Nodes.
-@onready var platform_timer: Timer = $PlatformTimer
 @onready var platforms: Node2D = $Platforms
 @onready var player: CharacterBody2D = $Player
 @onready var enemy_timer: Timer = $EnemyTimer
 @onready var enemies: Node2D = $Enemies
 
+var last_platform: Platform
 
-# We need to find another way to spawn platforms so that they are somewhat evenly spaced apart. 
-# Could use the distance the center of each platform as a starting point. 
-# Could check the distance between in the update loop.
-func _on_platform_timer_timeout() -> void:
-	platform_timer.start()
-	
+func _process(delta):
+	if last_platform:
+		# TODO: Set range of distance of which platforms can spawn. 
+		if last_platform.position.x < screen_size.x - 150:
+			spawn_platform()
+	else: 
+		spawn_platform()
+
+
+
+func spawn_platform(): 
 	# Spawn platform at right of screen at random height.
 	var rand_y = get_random_height()
 	var p = PLATFORM.instantiate() as Platform
@@ -51,6 +56,8 @@ func _on_platform_timer_timeout() -> void:
 	platforms.add_child(p)
 	p.init(reality)
 	
+	last_platform = p
+	
 	p.linear_velocity.x = -platform_speed  # Set speed of platform
 	
 	# Make the platform visible if its it's reality. 
@@ -58,7 +65,6 @@ func _on_platform_timer_timeout() -> void:
 		p.set_visibility(true)
 	else:
 		p.set_visibility(false)
-
 
 # Flip the reality when a player jumps. 
 func _on_player_player_jumped() -> void:

@@ -22,13 +22,27 @@ func _physics_process(delta: float) -> void:
 	
 	jump_component.handle_jump()
 	
+	if Input.is_action_pressed("up"):
+		# Only be able to hover if add the end of jump. Velocity > 0: 
+		if velocity.y > 0: 
+			velocity_component.is_hovering = true
+		else: 
+			velocity_component.is_hovering = false
+			
+	
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
-		jump_component.try_to_jump()
+		if jump_component.try_to_jump():
+			velocity_component.is_hovering = false
+			
 	
 	if event.is_action_pressed("down"):
 		velocity_component.fast_fall()
+
+	
+	if event.is_action_released("up"):
+		velocity_component.is_hovering = false
 
 # The player has successfully jumped! Change realites.
 func _on_jump_component_jumped() -> void:
