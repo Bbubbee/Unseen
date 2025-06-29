@@ -19,3 +19,6 @@ func move(delta: float, direction: float):
 
 func handle_gravity(delta: float): 
 	if not actor.is_on_floor(): actor.velocity.y += gravity * delta
+	
+func fast_fall():
+	actor.velocity.y = 350

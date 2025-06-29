@@ -26,6 +26,9 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		jump_component.try_to_jump()
+	
+	if event.is_action_pressed("down"):
+		velocity_component.fast_fall()
 
 # The player has successfully jumped! Change realites.
 func _on_jump_component_jumped() -> void:
