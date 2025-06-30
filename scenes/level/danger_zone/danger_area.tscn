@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://t3raceuivu7d"]
+
+[ext_resource type="Script" path="res://scenes/level/danger_zone/danger_area.gd" id="1_77hmh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pm5x"]
+size = Vector2(26.345, 300)
+
+[node name="DangerArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_77hmh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6pm5x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

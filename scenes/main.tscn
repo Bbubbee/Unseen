@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://hlivv6icx1lg"]
+[gd_scene load_steps=6 format=3 uid="uid://hlivv6icx1lg"]
 
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_1ttbb"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_papdv"]
 [ext_resource type="Script" path="res://scenes/ui.gd" id="3_kks2r"]
+[ext_resource type="PackedScene" uid="uid://t3raceuivu7d" path="res://scenes/level/danger_zone/danger_area.tscn" id="4_f8dj5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
 size = Vector2(573, 45)
@@ -39,7 +40,18 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "score: 0"
 
+[node name="DangerArea" parent="." instance=ExtResource("4_f8dj5")]
+position = Vector2(-15, 31)
+direction = "Left"
+
+[node name="DangerArea2" parent="." instance=ExtResource("4_f8dj5")]
+position = Vector2(313, 25)
+direction = "Right"
+
 [connection signal="player_jumped" from="Player" to="." method="_on_player_player_jumped"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="increase_difficulty" from="UI" to="." method="_on_ui_increase_difficulty"]
+
+[editable path="DangerArea"]
+[editable path="DangerArea2"]
