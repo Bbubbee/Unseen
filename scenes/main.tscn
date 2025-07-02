@@ -1,19 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://hlivv6icx1lg"]
+[gd_scene load_steps=8 format=3 uid="uid://hlivv6icx1lg"]
 
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_1ttbb"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_papdv"]
+[ext_resource type="Script" path="res://scenes/level/temp_floor.gd" id="2_fwwoo"]
 [ext_resource type="Script" path="res://scenes/ui.gd" id="3_kks2r"]
 [ext_resource type="PackedScene" uid="uid://t3raceuivu7d" path="res://scenes/level/danger_zone/danger_area.tscn" id="4_f8dj5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
 size = Vector2(573, 45)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyh3o"]
+size = Vector2(625, 20)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_papdv")
 
-[node name="TempFloor" type="StaticBody2D" parent="."]
+[node name="TempFloor" type="RigidBody2D" parent="."]
 position = Vector2(125, 170)
 collision_mask = 0
+gravity_scale = 0.0
+linear_velocity = Vector2(-50, 0)
+linear_damp_mode = 1
+script = ExtResource("2_fwwoo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TempFloor"]
 shape = SubResource("RectangleShape2D_c1pls")
@@ -44,9 +52,22 @@ text = "score: 0"
 position = Vector2(-15, 31)
 direction = "Left"
 
+[node name="CollisionShape2D" parent="DangerArea" index="0"]
+position = Vector2(-60, 0)
+
 [node name="DangerArea2" parent="." instance=ExtResource("4_f8dj5")]
 position = Vector2(313, 25)
 direction = "Right"
+
+[node name="CollisionShape2D" parent="DangerArea2" index="0"]
+position = Vector2(53, 0)
+
+[node name="DangerArea3" parent="." instance=ExtResource("4_f8dj5")]
+position = Vector2(118, 182)
+direction = "Bottom"
+
+[node name="CollisionShape2D" parent="DangerArea3" index="0"]
+shape = SubResource("RectangleShape2D_yyh3o")
 
 [connection signal="player_jumped" from="Player" to="." method="_on_player_player_jumped"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
@@ -55,3 +76,4 @@ direction = "Right"
 
 [editable path="DangerArea"]
 [editable path="DangerArea2"]
+[editable path="DangerArea3"]

@@ -14,3 +14,5 @@ func _on_body_entered(body):
 	elif direction == "Left": 
 		player.velocity.x = 800
 		player.velocity.y = -300	
+	elif direction == "Bottom": 
+		player.velocity.y = -500	

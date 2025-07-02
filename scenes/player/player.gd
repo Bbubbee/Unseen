@@ -1,7 +1,6 @@
 extends CharacterBody2D
 class_name Player
 
-
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
@@ -9,6 +8,8 @@ signal player_jumped
 
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 @onready var jump_component: JumpComponent = $JumpComponent
+
+var hp  
 
 
 func _physics_process(delta: float) -> void:
@@ -51,4 +52,5 @@ func _on_jump_component_jumped() -> void:
 
 func _on_hurtbox_hit() -> void:
 	velocity.y = -300
+	hp -= 1 
 		

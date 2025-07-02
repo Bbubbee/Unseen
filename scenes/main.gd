@@ -128,3 +128,4 @@ func _on_ui_increase_difficulty() -> void:
 	if platform_speed > 300: return
 	platform_speed = platform_speed + 25
 	
+	
