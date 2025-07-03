@@ -24,7 +24,7 @@ func _ready():
 func handle_jump():
 	if actor.is_on_floor():
 		can_jump_from_ground = true
-		jumps = total_jumps
+		restore_jumps()
 	
 	if not actor.is_on_floor() and coyote_timer.is_stopped():
 		coyote_timer.start(coyote_time)
@@ -34,6 +34,10 @@ func handle_jump():
 
 func _on_coyote_timer_timeout():
 	can_jump_from_ground = false
+	
+
+func restore_jumps(): 
+	jumps = total_jumps
 
 
 func try_to_jump():
