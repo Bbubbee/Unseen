@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://chn6xqq2jx0jx"]
+[gd_scene load_steps=4 format=3 uid="uid://chn6xqq2jx0jx"]
 
+[ext_resource type="Script" path="res://scenes/level/tutorial.gd" id="1_xksgv"]
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_y05hk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyoiw"]
 size = Vector2(573, 45)
 
 [node name="Tutorial" type="Node2D"]
+script = ExtResource("1_xksgv")
 
 [node name="TempFloor" type="StaticBody2D" parent="."]
 position = Vector2(125, 170)
@@ -16,3 +18,19 @@ shape = SubResource("RectangleShape2D_nyoiw")
 
 [node name="Player" parent="." instance=ExtResource("1_y05hk")]
 position = Vector2(56, 113)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 51.0
+offset_right = 244.0
+offset_bottom = 112.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 10
+text = "WD - move
+Space - jump
+W - float
+S - fast fall
+
+Jump to change realities"
