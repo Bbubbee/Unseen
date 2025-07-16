@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Unseen"
-run/main_scene="res://scenes/test/test.tscn"
+run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Events="*res://utils/globals/events.gd"
-SceneTransition="*res://components/scene_transition/scene_transition.tscn"
+SceneTransition="*res://utils/components/scene_transition/scene_transition.tscn"
 
 [display]
 
@@ -31,10 +31,10 @@ window/stretch/mode="canvas_items"
 [file_customization]
 
 folder_colors={
-"res://components/": "blue",
 "res://data/": "teal",
 "res://scenes/": "pink",
-"res://utils/": "purple"
+"res://utils/": "purple",
+"res://utils/components/": "purple"
 }
 
 [input]

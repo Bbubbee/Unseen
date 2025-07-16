@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://hlivv6icx1lg"]
+[gd_scene load_steps=9 format=3 uid="uid://hlivv6icx1lg"]
 
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_1ttbb"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_papdv"]
 [ext_resource type="Script" path="res://scenes/level/temp_floor.gd" id="2_fwwoo"]
 [ext_resource type="Script" path="res://scenes/ui.gd" id="3_kks2r"]
 [ext_resource type="PackedScene" uid="uid://t3raceuivu7d" path="res://scenes/level/danger_zone/danger_area.tscn" id="4_f8dj5"]
+[ext_resource type="PackedScene" uid="uid://tip86uatudk0" path="res://utils/components/camera_screen_shake/camera_screen_shake.tscn" id="6_6giow"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
 size = Vector2(573, 45)
@@ -77,6 +78,11 @@ direction = "Bottom"
 
 [node name="CollisionShape2D" parent="DangerArea3" index="0"]
 shape = SubResource("RectangleShape2D_yyh3o")
+
+[node name="CameraScreenShake" parent="." instance=ExtResource("6_6giow")]
+NOISE_SHAKE_SPEED = 20.0
+NOISE_SHAKE_STRENGTH = 20.0
+RANDOM_SHAKE_STRENGTH = 20.0
 
 [connection signal="player_jumped" from="Player" to="." method="_on_player_player_jumped"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

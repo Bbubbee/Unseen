@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://swdlvi4px611"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_y4u3j"]
-[ext_resource type="PackedScene" uid="uid://bmqdf4kabond7" path="res://components/hurtbox_component/hurtbox.tscn" id="2_shyob"]
-[ext_resource type="PackedScene" uid="uid://dtg7dr1jl4ced" path="res://components/velocity_component/velocity_component.tscn" id="3_5fbal"]
-[ext_resource type="PackedScene" uid="uid://hgfcjwgpa70n" path="res://components/jump_component/jump_component.tscn" id="4_p1a2g"]
-[ext_resource type="PackedScene" uid="uid://cy3aryyn22ci5" path="res://components/health_component/health_component.tscn" id="5_xebif"]
+[ext_resource type="PackedScene" uid="uid://bmqdf4kabond7" path="res://utils/components/hurtbox_component/hurtbox.tscn" id="2_shyob"]
+[ext_resource type="PackedScene" uid="uid://dtg7dr1jl4ced" path="res://utils/components/velocity_component/velocity_component.tscn" id="3_5fbal"]
+[ext_resource type="PackedScene" uid="uid://hgfcjwgpa70n" path="res://utils/components/jump_component/jump_component.tscn" id="4_p1a2g"]
+[ext_resource type="PackedScene" uid="uid://cy3aryyn22ci5" path="res://utils/components/health_component/health_component.tscn" id="5_xebif"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_re6wi"]
 radius = 6.0

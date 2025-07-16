@@ -65,4 +65,5 @@ func _on_hurtbox_hit() -> void:
 	health_component.change_health(-1)
 	# NOTE: Could be bugged.
 	jump_component.restore_jumps()
+	Events.screen_shake.emit()
 		
