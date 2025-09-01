@@ -18,7 +18,7 @@ var platform_speed: float = 200
 
 var last_platform: Platform
 
-func _process(delta):
+func _process(_delta):
 	if last_platform:
 		# TODO: Set range of distance of which platforms can spawn. 
 		if last_platform.position.x < screen_size.x - 150:

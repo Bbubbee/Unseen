@@ -6,7 +6,9 @@ extends Area2D
 func _on_body_entered(body):
 	if body is not Player: return
 
-	var player = body
+	var player = body as Player
+	
+	player.danger_area_hit()
 	
 	if direction == "Right":
 		player.velocity.x = -800

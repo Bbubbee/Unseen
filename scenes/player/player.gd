@@ -66,4 +66,11 @@ func _on_hurtbox_hit() -> void:
 	# NOTE: Could be bugged.
 	jump_component.restore_jumps()
 	Events.screen_shake.emit()
+
+
+# Hacky stupid way of registering getting hit by a danger area. 
+func danger_area_hit(): 
+	jump_component.restore_jumps() 
+	health_component.change_health(-1)
+	Events.screen_shake.emit()
 		
