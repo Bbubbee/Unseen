@@ -25,14 +25,13 @@ func _process(_delta):
 			spawn_platform()
 	else: 
 		spawn_platform()
-
-
+		
 
 func spawn_platform(): 
 	# Spawn platform at right of screen at random height.
 	var rand_y = get_random_height()
 	var p = PLATFORM.instantiate() as Platform
-	p.position = Vector2(screen_size.x, rand_y)
+	p.position = Vector2(screen_size.x + 64, rand_y)
 	
 	# Set reality of platform
 	var reality: bool

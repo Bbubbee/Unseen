@@ -1,25 +1,87 @@
-[gd_scene load_steps=8 format=3 uid="uid://swdlvi4px611"]
+[gd_scene load_steps=14 format=3 uid="uid://swdlvi4px611"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_y4u3j"]
+[ext_resource type="Texture2D" uid="uid://qj87s0ewl3bj" path="res://scenes/tilemap/unseen-characters-Sheet.png" id="2_cnjuq"]
 [ext_resource type="PackedScene" uid="uid://bmqdf4kabond7" path="res://utils/components/hurtbox_component/hurtbox.tscn" id="2_shyob"]
 [ext_resource type="PackedScene" uid="uid://dtg7dr1jl4ced" path="res://utils/components/velocity_component/velocity_component.tscn" id="3_5fbal"]
 [ext_resource type="PackedScene" uid="uid://hgfcjwgpa70n" path="res://utils/components/jump_component/jump_component.tscn" id="4_p1a2g"]
 [ext_resource type="PackedScene" uid="uid://cy3aryyn22ci5" path="res://utils/components/health_component/health_component.tscn" id="5_xebif"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv7ju"]
+atlas = ExtResource("2_cnjuq")
+region = Rect2(48, 64, 32, 32)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_re6wi"]
 radius = 6.0
-height = 20.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2pl2u"]
 radius = 6.0
 height = 20.0
+
+[sub_resource type="Animation" id="Animation_oxi6t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(48, 64, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_a66kd"]
+resource_name = "cool_idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(0, 64, 32, 32), Rect2(320, 64, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_ai8ob"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(48, 64, 32, 32), Rect2(368, 64, 32, 32)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q25dt"]
+_data = {
+"RESET": SubResource("Animation_oxi6t"),
+"cool_idle": SubResource("Animation_a66kd"),
+"warm_idle": SubResource("Animation_ai8ob")
+}
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_y4u3j")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_wv7ju")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_re6wi")
 debug_color = Color(0.180027, 0.638579, 0.219221, 0.42)
 
@@ -42,6 +104,12 @@ total_jumps = 3
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_xebif")]
 max_health = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q25dt")
+}
+autoplay = "cool_idle"
 
 [connection signal="hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]
 [connection signal="jumped" from="JumpComponent" to="." method="_on_jump_component_jumped"]

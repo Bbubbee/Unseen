@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://csyx4a2vjptme"]
+[gd_scene load_steps=6 format=3 uid="uid://csyx4a2vjptme"]
 
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_x38uj"]
 [ext_resource type="PackedScene" uid="uid://draktbxmfqkg5" path="res://scenes/enemy/enemy.tscn" id="2_cgssq"]
 [ext_resource type="PackedScene" uid="uid://tip86uatudk0" path="res://utils/components/camera_screen_shake/camera_screen_shake.tscn" id="3_mpro5"]
+[ext_resource type="PackedScene" uid="uid://b0ydmypi345ar" path="res://scenes/level/platform/platform.tscn" id="4_ur5yo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qapw3"]
 size = Vector2(573, 45)
@@ -25,3 +26,6 @@ position = Vector2(177, 107)
 [node name="CameraScreenShake" parent="." instance=ExtResource("3_mpro5")]
 NOISE_SHAKE_STRENGTH = 5.0
 RANDOM_SHAKE_STRENGTH = 10.0
+
+[node name="Platform" parent="." instance=ExtResource("4_ur5yo")]
+position = Vector2(255, 112)

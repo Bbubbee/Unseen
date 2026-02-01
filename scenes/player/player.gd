@@ -8,7 +8,9 @@ signal player_jumped
 
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 @onready var jump_component: JumpComponent = $JumpComponent
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var reality: bool = true
 var max_hp: int = 3
 var hp: int = 3
 
@@ -57,6 +59,16 @@ func _input(event: InputEvent) -> void:
 # The player has successfully jumped! Change realites.
 func _on_jump_component_jumped() -> void:
 	player_jumped.emit()
+	
+	# Switch reality character sprite.
+	if reality: 
+		animation_player.play("warm_idle")
+		reality = false
+	else: 
+		reality = true
+		animation_player.play("cool_idle")
+		
+		
 	
 	
 @onready var health_component = $HealthComponent
