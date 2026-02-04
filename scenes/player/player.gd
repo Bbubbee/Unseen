@@ -9,6 +9,7 @@ signal player_jumped
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 @onready var jump_component: JumpComponent = $JumpComponent
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 var reality: bool = true
 var max_hp: int = 3
@@ -21,16 +22,20 @@ func _ready():
 
 # Died. 
 func _on_died(): 
-	queue_free()
+	queue_free() 
 
 
 func _physics_process(delta: float) -> void:
+	print(self.velocity.x)
 	velocity_component.handle_gravity(delta)
 
-	# Movement
+	# Movement	
 	var direction = Input.get_axis("left", "right")
 	if direction: velocity_component.move(delta, direction)
 	else: velocity_component.stop(delta)
+	
+	# Face sprite towards direction moved
+	if direction != 0: sprite_2d.flip_h = direction < 0 
 	
 	if Input.is_action_pressed("up"):
 		# Only be able to hover if add the end of jump. Velocity > 0: 
@@ -44,14 +49,13 @@ func _physics_process(delta: float) -> void:
 	
 
 func _input(event: InputEvent) -> void:
+	
 	if event.is_action_pressed("ui_accept"):
 		if jump_component.try_to_jump():
 			velocity_component.is_hovering = false
 			
-	
 	if event.is_action_pressed("down"):
 		velocity_component.fast_fall()
-
 	
 	if event.is_action_released("up"):
 		velocity_component.is_hovering = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://hlivv6icx1lg"]
+[gd_scene load_steps=11 format=3 uid="uid://hlivv6icx1lg"]
 
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_1ttbb"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_papdv"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scenes/ui.gd" id="3_kks2r"]
 [ext_resource type="PackedScene" uid="uid://t3raceuivu7d" path="res://scenes/level/danger_zone/danger_area.tscn" id="4_f8dj5"]
 [ext_resource type="PackedScene" uid="uid://tip86uatudk0" path="res://utils/components/camera_screen_shake/camera_screen_shake.tscn" id="6_6giow"]
+[ext_resource type="Texture2D" uid="uid://p6sf8fn4l18b" path="res://assets/cool_background/1.png" id="7_iq485"]
+[ext_resource type="Texture2D" uid="uid://dovxmrr588pu0" path="res://assets/cool_background/2.png" id="8_iwhqu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
 size = Vector2(573, 45)
@@ -15,6 +17,16 @@ size = Vector2(625, 20)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_papdv")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(288, 0)
+autoscroll = Vector2(-10, 0)
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_iq485")
+centered = false
 
 [node name="TempFloor" type="RigidBody2D" parent="."]
 position = Vector2(125, 170)
@@ -27,10 +39,10 @@ script = ExtResource("2_fwwoo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TempFloor"]
 shape = SubResource("RectangleShape2D_c1pls")
 
+[node name="Platforms" type="Node2D" parent="."]
+
 [node name="Player" parent="." instance=ExtResource("1_1ttbb")]
 position = Vector2(34, 105)
-
-[node name="Platforms" type="Node2D" parent="."]
 
 [node name="EnemyTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -83,6 +95,26 @@ shape = SubResource("RectangleShape2D_yyh3o")
 NOISE_SHAKE_SPEED = 20.0
 NOISE_SHAKE_STRENGTH = 20.0
 RANDOM_SHAKE_STRENGTH = 20.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Sky"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_iq485")
+centered = false
+
+[node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(288.095, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Clouds"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_iwhqu")
+centered = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [connection signal="player_jumped" from="Player" to="." method="_on_player_player_jumped"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
