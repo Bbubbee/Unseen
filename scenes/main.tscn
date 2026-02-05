@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://hlivv6icx1lg"]
+[gd_scene load_steps=13 format=3 uid="uid://hlivv6icx1lg"]
 
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_1ttbb"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_papdv"]
 [ext_resource type="Script" path="res://scenes/level/temp_floor.gd" id="2_fwwoo"]
 [ext_resource type="Script" path="res://scenes/ui.gd" id="3_kks2r"]
+[ext_resource type="Texture2D" uid="uid://bnrqnjlw3cse2" path="res://assets/warm_background/1.png" id="4_75hxy"]
 [ext_resource type="PackedScene" uid="uid://t3raceuivu7d" path="res://scenes/level/danger_zone/danger_area.tscn" id="4_f8dj5"]
+[ext_resource type="Texture2D" uid="uid://caijusjit2jrq" path="res://assets/warm_background/3.png" id="5_rtjwg"]
 [ext_resource type="PackedScene" uid="uid://tip86uatudk0" path="res://utils/components/camera_screen_shake/camera_screen_shake.tscn" id="6_6giow"]
 [ext_resource type="Texture2D" uid="uid://p6sf8fn4l18b" path="res://assets/cool_background/1.png" id="7_iq485"]
 [ext_resource type="Texture2D" uid="uid://dovxmrr588pu0" path="res://assets/cool_background/2.png" id="8_iwhqu"]
@@ -18,14 +20,64 @@ size = Vector2(625, 20)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_papdv")
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
+[node name="CoolBGStatic" type="ColorRect" parent="."]
+offset_left = -25.0
+offset_top = -12.0
+offset_right = 306.0
+offset_bottom = 185.0
+color = Color(0.176471, 0.168627, 0.337255, 1)
+
+[node name="WarmBGStatic" type="ColorRect" parent="."]
+visible = false
+offset_left = -25.0
+offset_top = -12.0
+offset_right = 306.0
+offset_bottom = 185.0
+color = Color(0.384314, 0.490196, 0.682353, 1)
+
+[node name="CoolBG" type="Node2D" parent="."]
+
+[node name="SkyParallax" type="Parallax2D" parent="CoolBG"]
 repeat_size = Vector2(288, 0)
 autoscroll = Vector2(-10, 0)
 follow_viewport = false
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="CoolBG/SkyParallax"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_iq485")
+centered = false
+
+[node name="CloudsParallax" type="Parallax2D" parent="CoolBG"]
+repeat_size = Vector2(288, 0)
+autoscroll = Vector2(-25, 0)
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CoolBG/CloudsParallax"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_iwhqu")
+centered = false
+
+[node name="WarmBG" type="Node2D" parent="."]
+visible = false
+
+[node name="SkyParallax" type="Parallax2D" parent="WarmBG"]
+repeat_size = Vector2(288, 0)
+autoscroll = Vector2(-10, 0)
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="WarmBG/SkyParallax"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_75hxy")
+centered = false
+
+[node name="CloudsParallax" type="Parallax2D" parent="WarmBG"]
+repeat_size = Vector2(288, 0)
+autoscroll = Vector2(-25, 0)
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="WarmBG/CloudsParallax"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_rtjwg")
 centered = false
 
 [node name="TempFloor" type="RigidBody2D" parent="."]
@@ -113,8 +165,6 @@ motion_mirroring = Vector2(288.095, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_iwhqu")
 centered = false
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [connection signal="player_jumped" from="Player" to="." method="_on_player_player_jumped"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
