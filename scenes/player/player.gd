@@ -26,7 +26,6 @@ func _on_died():
 
 
 func _physics_process(delta: float) -> void:
-	print(self.velocity.x)
 	velocity_component.handle_gravity(delta)
 
 	# Movement	

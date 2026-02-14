@@ -1,11 +1,12 @@
 extends CanvasLayer
 
-@onready var score_label: Label = $ScoreLabel
+@onready var score_label: Label = $HBoxContainer/ScoreLabel
+@onready var health_label: Label = $HBoxContainer/HealthLabel
+
 var score = 0 
 
 signal increase_difficulty 
 
-@onready var health_label = $HealthLabel
 
 
 func _ready():

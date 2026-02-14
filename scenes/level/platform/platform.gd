@@ -13,7 +13,6 @@ var cool_4: Rect2i = Rect2i(80, 48, 64, 32)
 
 func init(r: bool = true): 
 	self.reality = r
-	print(self )
 	
 	if not r: 
 		collision_shape.debug_color = Color.PURPLE

@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://p6sf8fn4l18b" path="res://assets/cool_background/1.png" id="7_iq485"]
 [ext_resource type="TileSet" uid="uid://db46b5q0cocoj" path="res://data/resources/world_tile_set.tres" id="7_x4f5i"]
 [ext_resource type="Texture2D" uid="uid://dovxmrr588pu0" path="res://assets/cool_background/2.png" id="8_iwhqu"]
-[ext_resource type="FontFile" uid="uid://jphahq3f4s5s" path="res://assets/fonts/Airplanes in the Night Sky.ttf" id="10_ynw21"]
+[ext_resource type="FontFile" uid="uid://cus82pdvur6j4" path="res://assets/fonts/Wizards' Magic.ttf" id="10_3hinb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
 size = Vector2(573, 38.5)
@@ -121,19 +121,15 @@ autostart = true
 script = ExtResource("3_kks2r")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -34.5
-offset_right = 34.5
-offset_bottom = 34.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
 grow_horizontal = 2
-size_flags_horizontal = 4
 alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="UI/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_ynw21")
+theme_override_fonts/font = ExtResource("10_3hinb")
 text = "score: 0"
 
 [node name="HealthLabel" type="Label" parent="UI/HBoxContainer"]

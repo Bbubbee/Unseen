@@ -19,6 +19,7 @@ var platform_speed: float = 200
 @onready var warm_bg: Node2D = $WarmBG
 @onready var cool_bg_static: ColorRect = $CoolBGStatic
 @onready var warm_bg_static: ColorRect = $WarmBGStatic
+@onready var starting_floor: RigidBody2D = $StartingFloor
 
 var last_platform: Platform
 
@@ -78,11 +79,13 @@ func _on_player_player_jumped() -> void:
 		cool_bg.visible = true
 		warm_bg_static.visible = false
 		cool_bg_static.visible = true
+		
 	else: 
 		cool_bg.visible = false
 		warm_bg.visible = true	
 		cool_bg_static.visible = false
 		warm_bg_static.visible = true	
+
 	
 	# Make the new reality visible.	
 	for p: Platform in platforms.get_children():
