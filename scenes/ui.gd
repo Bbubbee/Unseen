@@ -12,9 +12,11 @@ signal increase_difficulty
 func _ready():
 	Events.connect("players_health_changed", _on_players_health_changed)
 	
+	health_label.text = "health: " + str(10)
+	
 
 func _on_players_health_changed(change: int): 
-	health_label.text = str(change) 
+	health_label.text = "health: " + str(change) 
 	
 
 func increase_score(): 

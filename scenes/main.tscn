@@ -121,24 +121,35 @@ autostart = true
 script = ExtResource("3_kks2r")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -34.5
-offset_right = 34.5
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 34.0
 grow_horizontal = 2
-size_flags_horizontal = 4
 alignment = 1
+
+[node name="PaddingLeft" type="Control" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
 
 [node name="ScoreLabel" type="Label" parent="UI/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_ynw21")
+theme_override_font_sizes/font_size = 14
 text = "score: 0"
+
+[node name="SpaceBetweenGap" type="Control" parent="UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HealthLabel" type="Label" parent="UI/HBoxContainer"]
 layout_mode = 2
-text = "3"
+theme_override_fonts/font = ExtResource("10_ynw21")
+theme_override_font_sizes/font_size = 14
+text = "health: 10"
+
+[node name="PaddingRight" type="Control" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
 
 [node name="DangerArea" parent="." instance=ExtResource("4_f8dj5")]
 position = Vector2(-15, 31)
