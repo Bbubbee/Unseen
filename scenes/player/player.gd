@@ -62,6 +62,8 @@ func _input(event: InputEvent) -> void:
 # The player has successfully jumped! Change realites.
 func _on_jump_component_jumped() -> void:
 	player_jumped.emit()
+	Events.current_reality = not Events.current_reality
+	Events.change_realities.emit(Events.current_reality) 
 	
 	# Switch reality character sprite.
 	if reality: 

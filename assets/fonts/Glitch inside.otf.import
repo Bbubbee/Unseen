@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cus82pdvur6j4"
-path="res://.godot/imported/Wizards' Magic.ttf-89afc6a3b340015403fa5301260a28d6.fontdata"
+uid="uid://bdyy8n27fqbwq"
+path="res://.godot/imported/Glitch inside.otf-1123d68940ff2afc80039ed7653ef9e6.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/Wizards' Magic.ttf"
-dest_files=["res://.godot/imported/Wizards' Magic.ttf-89afc6a3b340015403fa5301260a28d6.fontdata"]
+source_file="res://assets/fonts/Glitch inside.otf"
+dest_files=["res://.godot/imported/Glitch inside.otf-1123d68940ff2afc80039ed7653ef9e6.fontdata"]
 
 [params]
 

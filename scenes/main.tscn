@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://p6sf8fn4l18b" path="res://assets/cool_background/1.png" id="7_iq485"]
 [ext_resource type="TileSet" uid="uid://db46b5q0cocoj" path="res://data/resources/world_tile_set.tres" id="7_x4f5i"]
 [ext_resource type="Texture2D" uid="uid://dovxmrr588pu0" path="res://assets/cool_background/2.png" id="8_iwhqu"]
-[ext_resource type="FontFile" uid="uid://jphahq3f4s5s" path="res://assets/fonts/Airplanes in the Night Sky.ttf" id="10_ynw21"]
+[ext_resource type="FontFile" uid="uid://bdyy8n27fqbwq" path="res://assets/fonts/Glitch inside.otf" id="10_1iebi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
 size = Vector2(573, 38.5)
@@ -133,9 +133,9 @@ layout_mode = 2
 
 [node name="ScoreLabel" type="Label" parent="UI/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_ynw21")
+theme_override_fonts/font = ExtResource("10_1iebi")
 theme_override_font_sizes/font_size = 14
-text = "score: 0"
+text = "Score: 0"
 
 [node name="SpaceBetweenGap" type="Control" parent="UI/HBoxContainer"]
 layout_mode = 2
@@ -143,9 +143,9 @@ size_flags_horizontal = 3
 
 [node name="HealthLabel" type="Label" parent="UI/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_ynw21")
+theme_override_fonts/font = ExtResource("10_1iebi")
 theme_override_font_sizes/font_size = 14
-text = "health: 10"
+text = "HP: 10"
 
 [node name="PaddingRight" type="Control" parent="UI/HBoxContainer"]
 custom_minimum_size = Vector2(5, 0)
