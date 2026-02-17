@@ -15,13 +15,17 @@ var platform_speed: float = 200
 @onready var player: CharacterBody2D = $Player
 @onready var enemy_timer: Timer = $EnemyTimer
 @onready var enemies: Node2D = $Enemies
-@onready var cool_bg: Node2D = $CoolBG
-@onready var warm_bg: Node2D = $WarmBG
-@onready var cool_bg_static: ColorRect = $CoolBGStatic
-@onready var warm_bg_static: ColorRect = $WarmBGStatic
+@onready var cool_bg: Node2D = $Backgrounds/CoolBG
+@onready var warm_bg: Node2D = $Backgrounds/WarmBG
+@onready var cool_bg_static: ColorRect = $Backgrounds/CoolBGStatic
+@onready var warm_bg_static: ColorRect = $Backgrounds/WarmBGStatic
 @onready var starting_floor: RigidBody2D = $StartingFloor
 
 var last_platform: Platform
+
+func _ready() -> void:
+	Events.connect("change_realities", _on_change_reality)
+
 
 func _process(_delta):
 	if last_platform:
@@ -71,34 +75,22 @@ func spawn_platform():
 		p.set_visibility(false)
 
 # Flip the reality when a player jumps. 
-func _on_player_player_jumped() -> void:
+func _on_change_reality(reality: bool) -> void:
 	current_reality = not current_reality  # Flip the realties.
 	
-	if current_reality: 
-		warm_bg.visible = false
-		cool_bg.visible = true
-		warm_bg_static.visible = false
-		cool_bg_static.visible = true
-		
-	else: 
-		cool_bg.visible = false
-		warm_bg.visible = true	
-		cool_bg_static.visible = false
-		warm_bg_static.visible = true	
-
 	
 	# Make the new reality visible.	
 	for p: Platform in platforms.get_children():
-		if p.reality == current_reality:
+		if p.reality == reality:
 			p.set_visibility(true)
 		else:
 			p.set_visibility(false)
 	
-	for e in enemies.get_children():
-		if e.reality == current_reality:
-			e.set_visibility(true)
-		else:
-			e.set_visibility(false)
+	#for e in enemies.get_children():
+		#if e.reality == current_reality:
+			#e.set_visibility(true)
+		#else:
+			#e.set_visibility(false)
 			
 
 func _on_enemy_timer_timeout() -> void:

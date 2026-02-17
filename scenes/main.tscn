@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://hlivv6icx1lg"]
+[gd_scene load_steps=16 format=4 uid="uid://hlivv6icx1lg"]
 
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_1ttbb"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_papdv"]
+[ext_resource type="Script" path="res://scenes/backgrounds.gd" id="2_7hyy1"]
 [ext_resource type="Script" path="res://scenes/level/temp_floor.gd" id="2_fwwoo"]
 [ext_resource type="Script" path="res://scenes/ui.gd" id="3_kks2r"]
 [ext_resource type="Texture2D" uid="uid://bnrqnjlw3cse2" path="res://assets/warm_background/1.png" id="4_75hxy"]
@@ -22,14 +23,17 @@ size = Vector2(625, 20)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_papdv")
 
-[node name="CoolBGStatic" type="ColorRect" parent="."]
+[node name="Backgrounds" type="Node2D" parent="."]
+script = ExtResource("2_7hyy1")
+
+[node name="CoolBGStatic" type="ColorRect" parent="Backgrounds"]
 offset_left = -25.0
 offset_top = -12.0
 offset_right = 306.0
 offset_bottom = 185.0
 color = Color(0.176471, 0.168627, 0.337255, 1)
 
-[node name="WarmBGStatic" type="ColorRect" parent="."]
+[node name="WarmBGStatic" type="ColorRect" parent="Backgrounds"]
 visible = false
 offset_left = -25.0
 offset_top = -12.0
@@ -37,47 +41,47 @@ offset_right = 306.0
 offset_bottom = 185.0
 color = Color(0.384314, 0.490196, 0.682353, 1)
 
-[node name="CoolBG" type="Node2D" parent="."]
+[node name="CoolBG" type="Node2D" parent="Backgrounds"]
 
-[node name="SkyParallax" type="Parallax2D" parent="CoolBG"]
+[node name="SkyParallax" type="Parallax2D" parent="Backgrounds/CoolBG"]
 repeat_size = Vector2(288, 0)
 autoscroll = Vector2(-10, 0)
 follow_viewport = false
 
-[node name="Sprite2D" type="Sprite2D" parent="CoolBG/SkyParallax"]
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/CoolBG/SkyParallax"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_iq485")
 centered = false
 
-[node name="CloudsParallax" type="Parallax2D" parent="CoolBG"]
+[node name="CloudsParallax" type="Parallax2D" parent="Backgrounds/CoolBG"]
 repeat_size = Vector2(288, 0)
 autoscroll = Vector2(-25, 0)
 follow_viewport = false
 
-[node name="Sprite2D" type="Sprite2D" parent="CoolBG/CloudsParallax"]
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/CoolBG/CloudsParallax"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_iwhqu")
 centered = false
 
-[node name="WarmBG" type="Node2D" parent="."]
+[node name="WarmBG" type="Node2D" parent="Backgrounds"]
 visible = false
 
-[node name="SkyParallax" type="Parallax2D" parent="WarmBG"]
+[node name="SkyParallax" type="Parallax2D" parent="Backgrounds/WarmBG"]
 repeat_size = Vector2(288, 0)
 autoscroll = Vector2(-10, 0)
 follow_viewport = false
 
-[node name="Sprite2D" type="Sprite2D" parent="WarmBG/SkyParallax"]
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/WarmBG/SkyParallax"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_75hxy")
 centered = false
 
-[node name="CloudsParallax" type="Parallax2D" parent="WarmBG"]
+[node name="CloudsParallax" type="Parallax2D" parent="Backgrounds/WarmBG"]
 repeat_size = Vector2(288, 0)
 autoscroll = Vector2(-25, 0)
 follow_viewport = false
 
-[node name="Sprite2D" type="Sprite2D" parent="WarmBG/CloudsParallax"]
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/WarmBG/CloudsParallax"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_rtjwg")
 centered = false
@@ -106,7 +110,8 @@ tile_set = ExtResource("7_x4f5i")
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_1ttbb")]
-position = Vector2(34, 105)
+position = Vector2(-2, 112)
+metadata/_edit_lock_ = true
 
 [node name="EnemyTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -195,8 +200,6 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_iwhqu")
 centered = false
 
-[connection signal="player_jumped" from="Player" to="." method="_on_player_player_jumped"]
-[connection signal="player_jumped" from="Player" to="StartingFloor" method="_on_player_player_jumped"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="increase_difficulty" from="UI" to="." method="_on_ui_increase_difficulty"]
