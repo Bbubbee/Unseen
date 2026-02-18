@@ -9,16 +9,28 @@ extends Node2D
 func _ready() -> void:
 	Events.connect("change_realities", _on_change_reality)
 	
-	
-func _on_change_reality(reality: bool):
-	if reality: 
+	if Events.current_reality: 
+		cool_bg.visible = false
+		warm_bg.visible = true	
+		cool_bg_static.visible = false
+		warm_bg_static.visible = true	
+		
+	else:
 		warm_bg.visible = false
 		cool_bg.visible = true
 		warm_bg_static.visible = false
 		cool_bg_static.visible = true
 	
-	else:
+	
+func _on_change_reality():
+	if Events.current_reality: 
 		cool_bg.visible = false
 		warm_bg.visible = true	
 		cool_bg_static.visible = false
 		warm_bg_static.visible = true	
+		
+	else:
+		warm_bg.visible = false
+		cool_bg.visible = true
+		warm_bg_static.visible = false
+		cool_bg_static.visible = true

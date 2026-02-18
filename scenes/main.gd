@@ -6,7 +6,7 @@ const ENEMY = preload("res://scenes/enemy/enemy.tscn")
 # Variables. 
 @onready var screen_size = get_viewport_rect().size
 
-var current_reality = true
+
 var platform_reality = true
 var platform_speed: float = 200
 
@@ -48,7 +48,7 @@ func spawn_platform():
 	# Check if there is a previous platform.
 	if not platforms.get_child_count() > 0:
 		# There is not a previous platform. This is the first one. Make the reality true. 
-		reality = true
+		reality = Events.current_reality
 	else:
 		# There is a previous platform.
 		var previous_platform: Platform = platforms.get_child(platforms.get_child_count()-1)
@@ -69,19 +69,19 @@ func spawn_platform():
 	p.linear_velocity.x = -platform_speed  # Set speed of platform
 	
 	# Make the platform visible if its it's reality. 
-	if p.reality == current_reality:
+	if p.reality == Events.current_reality:
 		p.set_visibility(true)
 	else:
 		p.set_visibility(false)
 
 # Flip the reality when a player jumps. 
-func _on_change_reality(reality: bool) -> void:
-	current_reality = not current_reality  # Flip the realties.
+func _on_change_reality() -> void:
+	#current_reality = not current_reality  # Flip the realties.
 	
 	
 	# Make the new reality visible.	
 	for p: Platform in platforms.get_children():
-		if p.reality == reality:
+		if p.reality == Events.current_reality:
 			p.set_visibility(true)
 		else:
 			p.set_visibility(false)
@@ -92,24 +92,24 @@ func _on_change_reality(reality: bool) -> void:
 		#else:
 			#e.set_visibility(false)
 			
-
-func _on_enemy_timer_timeout() -> void:
-	return
-	enemy_timer.start()
-	
-	var rand_y = get_random_height()
-	var e = ENEMY.instantiate()
-	enemies.add_child(e)
-	e.position = Vector2(screen_size.x, rand_y)
-	
-	e.init(platform_reality)
-	e.linear_velocity.x = -150
-	
-	# Make the platform visible if its it's reality. 
-	if e.reality == current_reality:
-		e.set_visibility(true)
-	else:
-		e.set_visibility(false)
+# NOTE: Removed 
+#func _on_enemy_timer_timeout() -> void:
+	#return
+	#enemy_timer.start()
+	#
+	#var rand_y = get_random_height()
+	#var e = ENEMY.instantiate()
+	#enemies.add_child(e)
+	#e.position = Vector2(screen_size.x, rand_y)
+	#
+	#e.init(platform_reality)
+	#e.linear_velocity.x = -150
+	#
+	## Make the platform visible if its it's reality. 
+	#if e.reality == Events.current_reality:
+		#e.set_visibility(true)
+	#else:
+		#e.set_visibility(false)
 	
 
 

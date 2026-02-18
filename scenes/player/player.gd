@@ -19,6 +19,11 @@ var hp: int = 3
 func _ready():
 	health_component.connect("died", _on_died)
 	
+	if Events.current_reality: animation_player.play("warm_idle")
+	else: animation_player.play("cool_idle")
+		
+
+	
 
 # Died. 
 func _on_died(): 
@@ -63,14 +68,12 @@ func _input(event: InputEvent) -> void:
 func _on_jump_component_jumped() -> void:
 	player_jumped.emit()
 	Events.current_reality = not Events.current_reality
-	Events.change_realities.emit(Events.current_reality) 
+	Events.change_realities.emit() 
 	
 	# Switch reality character sprite.
-	if reality: 
+	if Events.current_reality: 
 		animation_player.play("warm_idle")
-		reality = false
 	else: 
-		reality = true
 		animation_player.play("cool_idle")
 		
 		

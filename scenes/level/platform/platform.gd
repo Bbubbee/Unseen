@@ -14,7 +14,7 @@ var cool_4: Rect2i = Rect2i(80, 48, 64, 32)
 func init(r: bool = true): 
 	self.reality = r
 	
-	if not r: 
+	if r: 
 		collision_shape.debug_color = Color.PURPLE
 		sprite.texture = preload("res://scenes/tilemap/warm_4.png")
 		

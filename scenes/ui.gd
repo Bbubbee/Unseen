@@ -17,15 +17,24 @@ func _ready():
 	
 	health_label.text = "HP: " + str(10)
 	
+	if Events.current_reality:
+		score_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
+		health_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
+		
+	else: 
+		score_label.add_theme_font_override("font", GLITCH_INSIDE)
+		health_label.add_theme_font_override("font", GLITCH_INSIDE)
+	
 
-func _on_change_reality(reality: bool): 
-	if reality:
+func _on_change_reality(): 
+	if Events.current_reality:
+		score_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
+		health_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
+		
+	else: 
 		score_label.add_theme_font_override("font", GLITCH_INSIDE)
 		health_label.add_theme_font_override("font", GLITCH_INSIDE)
 		
-	else: 
-		score_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
-		health_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
 		
 		
 
