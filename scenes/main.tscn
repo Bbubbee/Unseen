@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://hlivv6icx1lg"]
+[gd_scene load_steps=17 format=4 uid="uid://hlivv6icx1lg"]
 
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_1ttbb"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_papdv"]
@@ -16,6 +16,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
 size = Vector2(573, 38.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7aa5"]
+size = Vector2(34, 203)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyh3o"]
 size = Vector2(625, 20)
@@ -168,7 +171,8 @@ position = Vector2(313, 25)
 direction = "Right"
 
 [node name="CollisionShape2D" parent="DangerArea2" index="0"]
-position = Vector2(53, 0)
+position = Vector2(46, 38.5)
+shape = SubResource("RectangleShape2D_v7aa5")
 
 [node name="DangerArea3" parent="." instance=ExtResource("4_f8dj5")]
 position = Vector2(118, 182)

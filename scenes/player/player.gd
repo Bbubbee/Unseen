@@ -10,6 +10,7 @@ signal player_jumped
 @onready var jump_component: JumpComponent = $JumpComponent
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var fastfall_timer: Timer = $FastfallTimer
 
 var reality: bool = true
 var max_hp: int = 3
@@ -58,7 +59,7 @@ func _input(event: InputEvent) -> void:
 		if jump_component.try_to_jump():
 			velocity_component.is_hovering = false
 			
-	if event.is_action_pressed("down"):
+	if event.is_action_pressed("down") and fastfall_timer.is_stopped():
 		velocity_component.fast_fall()
 	
 	if event.is_action_released("up"):
@@ -93,4 +94,5 @@ func danger_area_hit():
 	jump_component.restore_jumps() 
 	health_component.change_health(-1)
 	Events.screen_shake.emit()
-		
+	fastfall_timer.start()
+	

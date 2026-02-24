@@ -110,7 +110,12 @@ libraries = {
 }
 autoplay = "cool_idle"
 
+[node name="FastfallTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
 [connection signal="hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]
 [connection signal="jumped" from="JumpComponent" to="." method="_on_jump_component_jumped"]
+[connection signal="timeout" from="FastfallTimer" to="." method="_on_fastfall_timer_timeout"]
 
 [editable path="Hurtbox"]
