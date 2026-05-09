@@ -5,3 +5,4 @@ extends Node
 signal players_health_changed(change: int)
 signal screen_shake
 signal change_realities()
+signal players_jump_count_changed(jumps: int)

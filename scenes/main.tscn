@@ -1,10 +1,10 @@
-[gd_scene load_steps=17 format=4 uid="uid://hlivv6icx1lg"]
+[gd_scene format=4 uid="uid://hlivv6icx1lg"]
 
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_1ttbb"]
-[ext_resource type="Script" path="res://scenes/main.gd" id="1_papdv"]
-[ext_resource type="Script" path="res://scenes/backgrounds.gd" id="2_7hyy1"]
-[ext_resource type="Script" path="res://scenes/level/temp_floor.gd" id="2_fwwoo"]
-[ext_resource type="Script" path="res://scenes/ui.gd" id="3_kks2r"]
+[ext_resource type="Script" uid="uid://c65g8mbw7knvb" path="res://scenes/main.gd" id="1_papdv"]
+[ext_resource type="Script" uid="uid://cvsfk6yxeissa" path="res://scenes/backgrounds.gd" id="2_7hyy1"]
+[ext_resource type="Script" uid="uid://c052g84hj6c4e" path="res://scenes/level/temp_floor.gd" id="2_fwwoo"]
+[ext_resource type="Script" uid="uid://dex8qoxfawnsl" path="res://scenes/ui.gd" id="3_kks2r"]
 [ext_resource type="Texture2D" uid="uid://bnrqnjlw3cse2" path="res://assets/warm_background/1.png" id="4_75hxy"]
 [ext_resource type="PackedScene" uid="uid://t3raceuivu7d" path="res://scenes/level/danger_zone/danger_area.tscn" id="4_f8dj5"]
 [ext_resource type="Texture2D" uid="uid://caijusjit2jrq" path="res://assets/warm_background/3.png" id="5_rtjwg"]
@@ -17,26 +17,116 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
 size = Vector2(573, 38.5)
 
+[sub_resource type="Animation" id="Animation_trceg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BottomRow/JumpsCountLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BottomRow/JumpsCountLabel:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_jkv2x"]
+resource_name = "jump_count_flash_red_2"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BottomRow/JumpsCountLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.39999998),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.18431371, 1, 0.33088237, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BottomRow/JumpsCountLabel:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [10, 15, 10]
+}
+
+[sub_resource type="Animation" id="Animation_a8y0u"]
+resource_name = "jump_count_flash_red"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BottomRow/JumpsCountLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.39999998),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.18359375, 0.18359375, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BottomRow/JumpsCountLabel:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [10, 15, 10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jkv2x"]
+_data = {
+&"RESET": SubResource("Animation_trceg"),
+&"jump_count_flash_green": SubResource("Animation_jkv2x"),
+&"jump_count_flash_red": SubResource("Animation_a8y0u")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7aa5"]
 size = Vector2(34, 203)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyh3o"]
 size = Vector2(625, 20)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=2001072222]
 script = ExtResource("1_papdv")
 
-[node name="Backgrounds" type="Node2D" parent="."]
+[node name="Backgrounds" type="Node2D" parent="." unique_id=82810897]
 script = ExtResource("2_7hyy1")
 
-[node name="CoolBGStatic" type="ColorRect" parent="Backgrounds"]
+[node name="CoolBGStatic" type="ColorRect" parent="Backgrounds" unique_id=1437093666]
 offset_left = -25.0
 offset_top = -12.0
 offset_right = 306.0
 offset_bottom = 185.0
 color = Color(0.176471, 0.168627, 0.337255, 1)
 
-[node name="WarmBGStatic" type="ColorRect" parent="Backgrounds"]
+[node name="WarmBGStatic" type="ColorRect" parent="Backgrounds" unique_id=392296311]
 visible = false
 offset_left = -25.0
 offset_top = -12.0
@@ -44,52 +134,52 @@ offset_right = 306.0
 offset_bottom = 185.0
 color = Color(0.384314, 0.490196, 0.682353, 1)
 
-[node name="CoolBG" type="Node2D" parent="Backgrounds"]
+[node name="CoolBG" type="Node2D" parent="Backgrounds" unique_id=1157247806]
 
-[node name="SkyParallax" type="Parallax2D" parent="Backgrounds/CoolBG"]
+[node name="SkyParallax" type="Parallax2D" parent="Backgrounds/CoolBG" unique_id=712282048]
 repeat_size = Vector2(288, 0)
 autoscroll = Vector2(-10, 0)
 follow_viewport = false
 
-[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/CoolBG/SkyParallax"]
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/CoolBG/SkyParallax" unique_id=1853981883]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_iq485")
 centered = false
 
-[node name="CloudsParallax" type="Parallax2D" parent="Backgrounds/CoolBG"]
+[node name="CloudsParallax" type="Parallax2D" parent="Backgrounds/CoolBG" unique_id=1506059072]
 repeat_size = Vector2(288, 0)
 autoscroll = Vector2(-25, 0)
 follow_viewport = false
 
-[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/CoolBG/CloudsParallax"]
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/CoolBG/CloudsParallax" unique_id=389014761]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_iwhqu")
 centered = false
 
-[node name="WarmBG" type="Node2D" parent="Backgrounds"]
+[node name="WarmBG" type="Node2D" parent="Backgrounds" unique_id=1854055526]
 visible = false
 
-[node name="SkyParallax" type="Parallax2D" parent="Backgrounds/WarmBG"]
+[node name="SkyParallax" type="Parallax2D" parent="Backgrounds/WarmBG" unique_id=1751375867]
 repeat_size = Vector2(288, 0)
 autoscroll = Vector2(-10, 0)
 follow_viewport = false
 
-[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/WarmBG/SkyParallax"]
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/WarmBG/SkyParallax" unique_id=806733043]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_75hxy")
 centered = false
 
-[node name="CloudsParallax" type="Parallax2D" parent="Backgrounds/WarmBG"]
+[node name="CloudsParallax" type="Parallax2D" parent="Backgrounds/WarmBG" unique_id=676945223]
 repeat_size = Vector2(288, 0)
 autoscroll = Vector2(-25, 0)
 follow_viewport = false
 
-[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/WarmBG/CloudsParallax"]
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/WarmBG/CloudsParallax" unique_id=1304994827]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_rtjwg")
 centered = false
 
-[node name="StartingFloor" type="RigidBody2D" parent="."]
+[node name="StartingFloor" type="RigidBody2D" parent="." unique_id=423345303]
 position = Vector2(125, 160)
 collision_mask = 0
 gravity_scale = 0.0
@@ -97,76 +187,109 @@ linear_velocity = Vector2(-50, 0)
 linear_damp_mode = 1
 script = ExtResource("2_fwwoo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartingFloor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartingFloor" unique_id=1367727863]
 position = Vector2(0, 3.25)
 shape = SubResource("RectangleShape2D_c1pls")
 
-[node name="WarmTileMapLayer" type="TileMapLayer" parent="StartingFloor"]
+[node name="WarmTileMapLayer" type="TileMapLayer" parent="StartingFloor" unique_id=1930129497]
 visible = false
 tile_map_data = PackedByteArray("AADv////AAACAAEAAADv/wAAAAACAAIAAADw////AAACAAEAAADw/wAAAAACAAIAAADx////AAACAAEAAADx/wAAAAACAAIAAADy////AAACAAEAAADy/wAAAAACAAIAAADz////AAACAAEAAADz/wAAAAACAAIAAAD0////AAACAAEAAAD0/wAAAAACAAIAAAD1////AAACAAEAAAD1/wAAAAACAAIAAAD2////AAACAAEAAAD2/wAAAAACAAIAAAD3////AAACAAEAAAD3/wAAAAACAAIAAAD4////AAACAAEAAAD4/wAAAAACAAIAAAD5////AAACAAEAAAD5/wAAAAACAAIAAAD6////AAACAAEAAAD6/wAAAAACAAIAAAD7////AAACAAEAAAD7/wAAAAACAAIAAAD8////AAACAAEAAAD8/wAAAAACAAIAAAD9////AAACAAEAAAD9/wAAAAACAAIAAAD+////AAACAAEAAAD+/wAAAAACAAIAAAD/////AAACAAEAAAD//wAAAAACAAIAAAAAAP//AAACAAEAAAAAAAAAAAACAAIAAAABAP//AAACAAEAAAABAAAAAAACAAIAAAACAP//AAACAAEAAAACAAAAAAACAAIAAAADAP//AAACAAEAAAADAAAAAAACAAIAAAAEAP//AAACAAEAAAAEAAAAAAACAAIAAAAFAP//AAACAAEAAAAFAAAAAAACAAIAAAAGAP//AAACAAEAAAAGAAAAAAACAAIAAAAHAP//AAACAAEAAAAHAAAAAAACAAIAAAAIAP//AAACAAEAAAAIAAAAAAACAAIAAAAJAP//AAACAAEAAAAJAAAAAAACAAIAAAAKAP//AAACAAEAAAAKAAAAAAACAAIAAAALAP//AAACAAEAAAALAAAAAAACAAIAAAAMAP//AAACAAEAAAAMAAAAAAACAAIAAAANAP//AAACAAEAAAANAAAAAAACAAIAAAAOAP//AAACAAEAAAAOAAAAAAACAAIAAAAPAP//AAACAAEAAAAPAAAAAAACAAIAAAAQAP//AAACAAEAAAAQAAAAAAACAAIAAAARAP//AAADAAEAAAARAAAAAAADAAIAAAA=")
 tile_set = ExtResource("7_x4f5i")
 
-[node name="CoolTileMapLayer" type="TileMapLayer" parent="StartingFloor"]
+[node name="CoolTileMapLayer" type="TileMapLayer" parent="StartingFloor" unique_id=2105044769]
 tile_map_data = PackedByteArray("AADv////AAAFAAEAAADv/wAAAAAFAAIAAADw////AAAGAAEAAADw/wAAAAAGAAIAAADx////AAAGAAEAAADx/wAAAAAGAAIAAADy////AAAGAAEAAADy/wAAAAAGAAIAAADz////AAAGAAEAAADz/wAAAAAGAAIAAAD0////AAAGAAEAAAD0/wAAAAAGAAIAAAARAP//AAAHAAEAAAD1////AAAGAAEAAAD1/wAAAAAGAAIAAAD2////AAAGAAEAAAD2/wAAAAAGAAIAAAD3////AAAGAAEAAAD3/wAAAAAGAAIAAAD4////AAAGAAEAAAD4/wAAAAAGAAIAAAD5////AAAGAAEAAAD5/wAAAAAGAAIAAAD6////AAAGAAEAAAD6/wAAAAAGAAIAAAD7////AAAGAAEAAAD7/wAAAAAGAAIAAAD8////AAAGAAEAAAD8/wAAAAAGAAIAAAD9////AAAGAAEAAAD9/wAAAAAGAAIAAAD+////AAAGAAEAAAD+/wAAAAAGAAIAAAD/////AAAGAAEAAAD//wAAAAAGAAIAAAAAAP//AAAGAAEAAAAAAAAAAAAGAAIAAAABAP//AAAGAAEAAAABAAAAAAAGAAIAAAACAP//AAAGAAEAAAACAAAAAAAGAAIAAAADAP//AAAGAAEAAAADAAAAAAAGAAIAAAAEAP//AAAGAAEAAAAEAAAAAAAGAAIAAAAFAP//AAAGAAEAAAAFAAAAAAAGAAIAAAAGAP//AAAGAAEAAAAGAAAAAAAGAAIAAAAHAP//AAAGAAEAAAAHAAAAAAAGAAIAAAAIAP//AAAGAAEAAAAIAAAAAAAGAAIAAAAJAP//AAAGAAEAAAAKAP//AAAGAAEAAAALAP//AAAGAAEAAAAMAP//AAAGAAEAAAANAP//AAAGAAEAAAAOAP//AAAGAAEAAAAPAP//AAAGAAEAAAAQAP//AAAGAAEAAAAJAAAAAAAGAAIAAAAKAAAAAAAGAAIAAAALAAAAAAAGAAIAAAAMAAAAAAAGAAIAAAANAAAAAAAGAAIAAAAOAAAAAAAGAAIAAAAPAAAAAAAGAAIAAAAQAAAAAAAGAAIAAAARAAAAAAAHAAIAAAA=")
 tile_set = ExtResource("7_x4f5i")
 
-[node name="Platforms" type="Node2D" parent="."]
+[node name="Platforms" type="Node2D" parent="." unique_id=2083586168]
 
-[node name="Player" parent="." instance=ExtResource("1_1ttbb")]
+[node name="Player" parent="." unique_id=188149636 instance=ExtResource("1_1ttbb")]
 position = Vector2(-2, 112)
 metadata/_edit_lock_ = true
 
-[node name="EnemyTimer" type="Timer" parent="."]
+[node name="EnemyTimer" type="Timer" parent="." unique_id=1489234520]
 wait_time = 5.0
 autostart = true
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="Enemies" type="Node2D" parent="." unique_id=604768398]
 
-[node name="ScoreTimer" type="Timer" parent="."]
+[node name="ScoreTimer" type="Timer" parent="." unique_id=615522931]
 autostart = true
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1914927946]
 script = ExtResource("3_kks2r")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI" unique_id=287753079]
+root_node = NodePath("../HBoxContainer")
+libraries/ = SubResource("AnimationLibrary_jkv2x")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=663219286]
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 34.0
+offset_bottom = 16.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="PaddingLeft" type="Control" parent="UI/HBoxContainer"]
-custom_minimum_size = Vector2(5, 0)
+[node name="PaddingLeft" type="Control" parent="UI/HBoxContainer" unique_id=1039841511]
+custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 
-[node name="ScoreLabel" type="Label" parent="UI/HBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="UI/HBoxContainer" unique_id=882533005]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_1iebi")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 10
 text = "Score: 0"
 
-[node name="SpaceBetweenGap" type="Control" parent="UI/HBoxContainer"]
+[node name="SpaceBetweenGap" type="Control" parent="UI/HBoxContainer" unique_id=1859405959]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HealthLabel" type="Label" parent="UI/HBoxContainer"]
+[node name="HealthLabel" type="Label" parent="UI/HBoxContainer" unique_id=1563692466]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_1iebi")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 10
 text = "HP: 10"
 
-[node name="PaddingRight" type="Control" parent="UI/HBoxContainer"]
-custom_minimum_size = Vector2(5, 0)
+[node name="PaddingRight" type="Control" parent="UI/HBoxContainer" unique_id=25667657]
+custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 
-[node name="DangerArea" parent="." instance=ExtResource("4_f8dj5")]
+[node name="BottomRow" type="HBoxContainer" parent="UI" unique_id=13051551]
+custom_minimum_size = Vector2(0, 28.115)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 66.0
+offset_bottom = 9.999985
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="PaddingLeft2" type="Control" parent="UI/BottomRow" unique_id=1174969972]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+
+[node name="JumpsLabel" type="Label" parent="UI/BottomRow" unique_id=1040875358]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("10_1iebi")
+theme_override_font_sizes/font_size = 10
+text = "Jumps:"
+
+[node name="JumpsCountLabel" type="Label" parent="UI/BottomRow" unique_id=1331803262]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("10_1iebi")
+theme_override_font_sizes/font_size = 10
+text = "3"
+
+[node name="DangerArea" parent="." unique_id=1867493403 instance=ExtResource("4_f8dj5")]
 position = Vector2(-15, 31)
 direction = "Left"
 
 [node name="CollisionShape2D" parent="DangerArea" index="0"]
 position = Vector2(-60, 0)
 
-[node name="DangerArea2" parent="." instance=ExtResource("4_f8dj5")]
+[node name="DangerArea2" parent="." unique_id=936601969 instance=ExtResource("4_f8dj5")]
 position = Vector2(313, 25)
 direction = "Right"
 
@@ -174,32 +297,32 @@ direction = "Right"
 position = Vector2(46, 38.5)
 shape = SubResource("RectangleShape2D_v7aa5")
 
-[node name="DangerArea3" parent="." instance=ExtResource("4_f8dj5")]
+[node name="DangerArea3" parent="." unique_id=1303292364 instance=ExtResource("4_f8dj5")]
 position = Vector2(118, 182)
 direction = "Bottom"
 
 [node name="CollisionShape2D" parent="DangerArea3" index="0"]
 shape = SubResource("RectangleShape2D_yyh3o")
 
-[node name="CameraScreenShake" parent="." instance=ExtResource("6_6giow")]
+[node name="CameraScreenShake" parent="." unique_id=94778179 instance=ExtResource("6_6giow")]
 NOISE_SHAKE_SPEED = 20.0
 NOISE_SHAKE_STRENGTH = 20.0
 RANDOM_SHAKE_STRENGTH = 20.0
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=901146338]
 visible = false
 
-[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1350254475]
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Sky"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Sky" unique_id=655539118]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_iq485")
 centered = false
 
-[node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground" unique_id=862366441]
 motion_mirroring = Vector2(288.095, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Clouds"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Clouds" unique_id=422518902]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_iwhqu")
 centered = false

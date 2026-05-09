@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://db46b5q0cocoj"]
+[gd_resource type="TileSet" format=3 uid="uid://db46b5q0cocoj"]
 
 [ext_resource type="Texture2D" uid="uid://bhs74hgywutye" path="res://scenes/tilemap/unseen-spritesheet.png" id="1_fqdi7"]
 

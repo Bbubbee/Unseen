@@ -13,6 +13,7 @@ var jumps := total_jumps
 var can_jump_from_ground := false
 
 signal jumped
+signal jumps_restored  # Made this to couple proof.
 
 
 func _ready():
@@ -37,9 +38,10 @@ func _on_coyote_timer_timeout():
 	
 
 func restore_jumps(): 
-	jumps = total_jumps
-
-
+	if not jumps == total_jumps: 
+		jumps = total_jumps
+		jumps_restored.emit()
+	
 func try_to_jump():
 	if jumps > 0:
 		if actor.is_on_floor() or can_jump_from_ground:

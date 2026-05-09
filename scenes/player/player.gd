@@ -4,7 +4,6 @@ class_name Player
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
-signal player_jumped 
 
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 @onready var jump_component: JumpComponent = $JumpComponent
@@ -67,9 +66,9 @@ func _input(event: InputEvent) -> void:
 
 # The player has successfully jumped! Change realites.
 func _on_jump_component_jumped() -> void:
-	player_jumped.emit()
 	Events.current_reality = not Events.current_reality
 	Events.change_realities.emit() 
+	Events.players_jump_count_changed.emit(jump_component.jumps) 
 	
 	# Switch reality character sprite.
 	if Events.current_reality: 
@@ -95,4 +94,6 @@ func danger_area_hit():
 	health_component.change_health(-1)
 	Events.screen_shake.emit()
 	fastfall_timer.start()
-	
+
+func _on_jump_component_jumps_restored():
+	Events.players_jump_count_changed.emit(jump_component.total_jumps)

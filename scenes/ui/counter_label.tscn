@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ccxall4mjpoaa"]
+
+[ext_resource type="Script" uid="uid://jfi6q5cpmm3j" path="res://scenes/ui/counter_label.gd" id="1_x6013"]
+
+[node name="CounterLabel" type="Label" unique_id=1386851978]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+script = ExtResource("1_x6013")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=254950365]
