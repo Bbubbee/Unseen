@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://chn6xqq2jx0jx"]
+[gd_scene load_steps=5 format=4 uid="uid://chn6xqq2jx0jx"]
 
 [ext_resource type="Script" path="res://scenes/level/tutorial.gd" id="1_xksgv"]
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_y05hk"]
+[ext_resource type="TileSet" uid="uid://db46b5q0cocoj" path="res://data/resources/world_tile_set.tres" id="2_sekxi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyoiw"]
 size = Vector2(573, 45)
@@ -14,7 +15,12 @@ position = Vector2(125, 170)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TempFloor"]
+position = Vector2(1, -5)
 shape = SubResource("RectangleShape2D_nyoiw")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="TempFloor"]
+tile_map_data = PackedByteArray("AAAJAP7/AAAGAAEAAAAJAP//AAAGAAIAAAAIAP7/AAAGAAEAAAAIAP//AAAGAAIAAAAHAP7/AAAGAAEAAAAHAP//AAAGAAIAAAAGAP7/AAAGAAEAAAAGAP//AAAGAAIAAAAFAP7/AAAGAAEAAAAFAP//AAAGAAIAAAAEAP7/AAAGAAEAAAAEAP//AAAGAAIAAAADAP7/AAAGAAEAAAADAP//AAAGAAIAAAACAP7/AAAGAAEAAAACAP//AAAGAAIAAAABAP7/AAAGAAEAAAABAP//AAAGAAIAAAAAAP7/AAAGAAEAAAAAAP//AAAGAAIAAAD///7/AAAGAAEAAAD/////AAAGAAIAAAD+//7/AAAGAAEAAAD+////AAAGAAIAAAD9//7/AAAGAAEAAAD9////AAAGAAIAAAD8//7/AAAGAAEAAAD8////AAAGAAIAAAD7//7/AAAGAAEAAAD7////AAAGAAIAAAD6//7/AAAGAAEAAAD6////AAAGAAIAAAD5//7/AAAGAAEAAAD5////AAAGAAIAAAD4//7/AAAGAAEAAAD4////AAAGAAIAAAD3//7/AAAGAAEAAAD3////AAAGAAIAAAAKAP7/AAAGAAEAAAAKAP//AAAGAAIAAAD4//3/AAAHAAEAAAD4//z/AAAHAAEAAAD4//v/AAAHAAEAAAD4//r/AAAHAAEAAAD4//n/AAAHAAEAAAD4//j/AAAHAAEAAAD4//f/AAAHAAEAAAD4//b/AAAHAAEAAAD4//X/AAAHAAEAAAAKAP3/AAAFAAEAAAAKAPz/AAAFAAEAAAAKAPv/AAAFAAEAAAAKAPr/AAAFAAEAAAAKAPn/AAAFAAEAAAAKAPj/AAAFAAEAAAAKAPf/AAAFAAEAAAAKAPb/AAAFAAEAAAAKAPX/AAAFAAEAAAA=")
+tile_set = ExtResource("2_sekxi")
 
 [node name="Player" parent="." instance=ExtResource("1_y05hk")]
 position = Vector2(56, 113)
