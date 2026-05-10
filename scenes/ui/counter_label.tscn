@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ccxall4mjpoaa"]
 
+[ext_resource type="FontFile" uid="uid://jphahq3f4s5s" path="res://assets/fonts/Airplanes in the Night Sky.ttf" id="1_6cqtb"]
 [ext_resource type="Script" uid="uid://jfi6q5cpmm3j" path="res://scenes/ui/counter_label.gd" id="1_x6013"]
 
 [node name="CounterLabel" type="Label" unique_id=1386851978]
@@ -8,6 +9,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_6cqtb")
+theme_override_font_sizes/font_size = 10
 text = "0"
 script = ExtResource("1_x6013")
 

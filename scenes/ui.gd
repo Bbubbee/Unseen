@@ -21,42 +21,30 @@ func _ready():
 	
 	health_label.text = "HP: " + str(10)
 	
-	if Events.current_reality:
-		score_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
-		health_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
-		jumps_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
-		jumps_count_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
+	set_font_based_on_reality(Events.current_reality)
 		
 		
-		
-	else: 
-		score_label.add_theme_font_override("font", GLITCH_INSIDE)
-		health_label.add_theme_font_override("font", GLITCH_INSIDE)
-		jumps_label.add_theme_font_override("font", GLITCH_INSIDE)
-		jumps_count_label.add_theme_font_override("font", GLITCH_INSIDE)
-		
-		
-	
-
 func _on_change_reality(): 
-	if Events.current_reality:
+	set_font_based_on_reality(Events.current_reality)
+		
+		
+func set_font_based_on_reality(reality: bool):
+	if reality:
 		score_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
 		health_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
 		jumps_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
 		jumps_count_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
 		
-		
-		
 	else: 
 		score_label.add_theme_font_override("font", GLITCH_INSIDE)
 		health_label.add_theme_font_override("font", GLITCH_INSIDE)
 		jumps_label.add_theme_font_override("font", GLITCH_INSIDE)
-		jumps_count_label.add_theme_font_override("font", GLITCH_INSIDE)
-		
-		
+		jumps_count_label.add_theme_font_override("font", GLITCH_INSIDE)	
+
 
 func _on_players_health_changed(change: int): 
 	health_label.text = "HP: " + str(change) 
+	
 	
 func _on_players_jump_count_changed(jump_count: int):
 	var prev_jump_count: int = int(jumps_count_label.text)
@@ -70,6 +58,7 @@ func _on_players_jump_count_changed(jump_count: int):
 
 		
 	jumps_count_label.text = str(jump_count)
+
 
 func increase_score(): 
 	score += 1

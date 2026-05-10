@@ -1,6 +1,8 @@
 extends Node
 
 @onready var current_reality: bool = [true, false].pick_random()
+# true = warm 
+# false = cool
 
 signal players_health_changed(change: int)
 signal screen_shake
