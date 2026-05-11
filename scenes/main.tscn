@@ -13,6 +13,7 @@
 [ext_resource type="TileSet" uid="uid://db46b5q0cocoj" path="res://data/resources/world_tile_set.tres" id="7_x4f5i"]
 [ext_resource type="Texture2D" uid="uid://dovxmrr588pu0" path="res://assets/cool_background/2.png" id="8_iwhqu"]
 [ext_resource type="FontFile" uid="uid://bdyy8n27fqbwq" path="res://assets/fonts/Glitch inside.otf" id="10_1iebi"]
+[ext_resource type="PackedScene" uid="uid://ccxall4mjpoaa" path="res://scenes/ui/counter_label.tscn" id="12_a8y0u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
 size = Vector2(573, 38.5)
@@ -225,7 +226,7 @@ libraries/ = SubResource("AnimationLibrary_jkv2x")
 [node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=663219286]
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 16.0
+offset_bottom = 24.0
 grow_horizontal = 2
 alignment = 1
 
@@ -247,7 +248,10 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_1iebi")
 theme_override_font_sizes/font_size = 10
-text = "HP: 10"
+text = "HP:"
+
+[node name="HealthCounterLabel" parent="UI/HBoxContainer" unique_id=1386851978 instance=ExtResource("12_a8y0u")]
+layout_mode = 2
 
 [node name="PaddingRight" type="Control" parent="UI/HBoxContainer" unique_id=25667657]
 custom_minimum_size = Vector2(2, 0)

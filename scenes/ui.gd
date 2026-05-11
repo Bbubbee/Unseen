@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var jumps_label: Label = $BottomRow/JumpsLabel
 @onready var jumps_count_label = $BottomRow/JumpsCountLabel
 @onready var animation_player = $AnimationPlayer
+@onready var health_counter_label: Label = $HBoxContainer/HealthCounterLabel
 
 const GLITCH_INSIDE = preload("res://assets/fonts/Glitch inside.otf")
 const AIRPLANES_IN_THE_NIGHT_SKY = preload("res://assets/fonts/Airplanes in the Night Sky.ttf")
@@ -19,7 +20,7 @@ func _ready():
 	Events.connect("change_realities", _on_change_reality)
 	Events.connect("players_jump_count_changed", _on_players_jump_count_changed)
 	
-	health_label.text = "HP: " + str(10)
+	health_counter_label.set_text("10")
 	
 	set_font_based_on_reality(Events.current_reality)
 		
@@ -43,7 +44,7 @@ func set_font_based_on_reality(reality: bool):
 
 
 func _on_players_health_changed(change: int): 
-	health_label.text = "HP: " + str(change) 
+	health_counter_label.set_text(str(change))
 	
 	
 func _on_players_jump_count_changed(jump_count: int):
