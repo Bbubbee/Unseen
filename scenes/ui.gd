@@ -35,16 +35,20 @@ func set_font_based_on_reality(reality: bool):
 		health_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
 		jumps_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
 		jumps_count_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
+		health_counter_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
 		
 	else: 
 		score_label.add_theme_font_override("font", GLITCH_INSIDE)
 		health_label.add_theme_font_override("font", GLITCH_INSIDE)
 		jumps_label.add_theme_font_override("font", GLITCH_INSIDE)
 		jumps_count_label.add_theme_font_override("font", GLITCH_INSIDE)	
+		health_counter_label.add_theme_font_override("font", GLITCH_INSIDE)
+		
 
 
 func _on_players_health_changed(change: int): 
 	health_counter_label.set_text(str(change))
+	health_counter_label.flash_red()
 	
 	
 func _on_players_jump_count_changed(jump_count: int):

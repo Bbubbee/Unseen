@@ -1,4 +1,5 @@
 extends Label
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,8 +13,8 @@ func _process(delta):
 	
 	
 func flash_green(): 
-	pass
+	animation_player.play("flash_green")
 	
 
 func flash_red(): 
-	pass
+	animation_player.play("flash_red")
