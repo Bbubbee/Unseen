@@ -1,50 +1,49 @@
 [gd_scene format=3 uid="uid://ccxall4mjpoaa"]
 
-[ext_resource type="FontFile" uid="uid://bdyy8n27fqbwq" path="res://assets/fonts/Glitch inside.otf" id="1_6cqtb"]
+[ext_resource type="FontFile" uid="uid://jphahq3f4s5s" path="res://assets/fonts/Airplanes in the Night Sky.ttf" id="1_6cqtb"]
 [ext_resource type="Script" uid="uid://jfi6q5cpmm3j" path="res://scenes/ui/counter_label.gd" id="1_x6013"]
 
-[sub_resource type="Animation" id="Animation_rgrnn"]
+[sub_resource type="Animation" id="Animation_6cqtb"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:theme_override_font_sizes/font_size")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:theme_override_colors/font_color")
+tracks/1/path = NodePath(".:theme_override_font_sizes/font_size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [null]
+"update": 1,
+"values": [10]
 }
 
 [sub_resource type="Animation" id="Animation_8ivgd"]
 resource_name = "flash_green"
 length = 0.4
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:theme_override_colors/font_color")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.20000002, 0.4),
+"times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.18431373, 1, 0.32941177, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(0.31982422, 1, 0.22265625, 1), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -59,63 +58,50 @@ tracks/1/keys = {
 "values": [10, 15, 10]
 }
 
-[sub_resource type="Animation" id="Animation_6cqtb"]
+[sub_resource type="Animation" id="Animation_rgrnn"]
 resource_name = "flash_red"
-length = 5.0
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:theme_override_font_sizes/font_size")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.26953125, 0.26953125, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.20000002, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [10, 15, 10]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:theme_override_colors/font_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.0666015),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.6945723, 0.10357452, 0.6475846, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_asxnl"]
-resource_name = "test"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:theme_override_colors/font_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.64623505),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [null, Color(0.6670982, 0.38958725, 0.2244587, 1)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgrnn"]
 _data = {
-&"RESET": SubResource("Animation_rgrnn"),
+&"RESET": SubResource("Animation_6cqtb"),
 &"flash_green": SubResource("Animation_8ivgd"),
-&"flash_red": SubResource("Animation_6cqtb"),
-&"test": SubResource("Animation_asxnl")
+&"flash_red": SubResource("Animation_rgrnn")
 }
 
 [node name="CounterLabel" type="Label" unique_id=1386851978]
+custom_minimum_size = Vector2(100, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.026794, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_6cqtb")
 theme_override_font_sizes/font_size = 10
 text = "0"

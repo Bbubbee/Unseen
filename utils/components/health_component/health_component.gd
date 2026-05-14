@@ -8,6 +8,7 @@ signal died
 
 # NOTE: Not decoupled. (Event) 
 
+
 func change_health(change: int):
 	current_health = clampi(current_health+change, 0, max_health)
 	

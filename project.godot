@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Events="*res://utils/globals/events.gd"
-SceneTransition="*res://utils/components/scene_transition/scene_transition.tscn"
+SceneTransition="*uid://dul4q3hipfgei"
 
 [display]
 

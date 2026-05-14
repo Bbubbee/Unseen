@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c65g8mbw7knvb" path="res://scenes/main.gd" id="1_papdv"]
 [ext_resource type="Script" uid="uid://cvsfk6yxeissa" path="res://scenes/backgrounds.gd" id="2_7hyy1"]
 [ext_resource type="Script" uid="uid://c052g84hj6c4e" path="res://scenes/level/temp_floor.gd" id="2_fwwoo"]
+[ext_resource type="Script" uid="uid://bw6jpuuy8qy06" path="res://scenes/end_game_menu.gd" id="2_jkv2x"]
 [ext_resource type="Script" uid="uid://dex8qoxfawnsl" path="res://scenes/ui.gd" id="3_kks2r"]
 [ext_resource type="Texture2D" uid="uid://bnrqnjlw3cse2" path="res://assets/warm_background/1.png" id="4_75hxy"]
 [ext_resource type="PackedScene" uid="uid://t3raceuivu7d" path="res://scenes/level/danger_zone/danger_area.tscn" id="4_f8dj5"]
@@ -14,9 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://dovxmrr588pu0" path="res://assets/cool_background/2.png" id="8_iwhqu"]
 [ext_resource type="FontFile" uid="uid://bdyy8n27fqbwq" path="res://assets/fonts/Glitch inside.otf" id="10_1iebi"]
 [ext_resource type="PackedScene" uid="uid://ccxall4mjpoaa" path="res://scenes/ui/counter_label.tscn" id="12_a8y0u"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
-size = Vector2(573, 38.5)
 
 [sub_resource type="Animation" id="Animation_trceg"]
 length = 0.001
@@ -55,6 +53,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [null]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../BottomRow/JumpsLabel:theme_override_colors/font_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_jkv2x"]
@@ -113,37 +123,127 @@ tracks/1/keys = {
 "values": [10, 15, 10]
 }
 
-[sub_resource type="Animation" id="Animation_jbj1t"]
-resource_name = "test"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HealthLabel:theme_override_colors/font_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5017891, 0.94462717),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.2718764, 0.18573615, 0.08215036, 1), Color(0.10674759, 0.2263754, 0.23524177, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jkv2x"]
 _data = {
 &"RESET": SubResource("Animation_trceg"),
 &"jump_count_flash_green": SubResource("Animation_jkv2x"),
-&"jump_count_flash_red": SubResource("Animation_a8y0u"),
-&"test": SubResource("Animation_jbj1t")
+&"jump_count_flash_red": SubResource("Animation_a8y0u")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pls"]
+size = Vector2(573, 38.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7aa5"]
-size = Vector2(34, 203)
+size = Vector2(34, 465)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyh3o"]
 size = Vector2(625, 20)
 
 [node name="Main" type="Node2D" unique_id=2001072222]
 script = ExtResource("1_papdv")
+
+[node name="EndGameMenu" type="CanvasLayer" parent="." unique_id=1356544906]
+script = ExtResource("2_jkv2x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndGameMenu" unique_id=276371962]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -33.0
+offset_right = 43.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+
+[node name="RestartButton" type="Button" parent="EndGameMenu/VBoxContainer" unique_id=1418734626]
+layout_mode = 2
+text = "Restart
+"
+
+[node name="EndButton" type="Button" parent="EndGameMenu/VBoxContainer" unique_id=684994194]
+layout_mode = 2
+text = "End Game"
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1914927946]
+script = ExtResource("3_kks2r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI" unique_id=287753079]
+root_node = NodePath("../HBoxContainer")
+libraries/ = SubResource("AnimationLibrary_jkv2x")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=663219286]
+custom_minimum_size = Vector2(0, 33.87)
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -5.0
+offset_bottom = 28.869999
+grow_horizontal = 2
+alignment = 1
+
+[node name="PaddingLeft" type="Control" parent="UI/HBoxContainer" unique_id=1039841511]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="UI/HBoxContainer" unique_id=882533005]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_1iebi")
+theme_override_font_sizes/font_size = 10
+text = "Score:"
+
+[node name="ScoreCounterLabel" parent="UI/HBoxContainer" unique_id=1386851978 instance=ExtResource("12_a8y0u")]
+layout_mode = 2
+
+[node name="SpaceBetweenGap" type="Control" parent="UI/HBoxContainer" unique_id=1859405959]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HealthLabel" type="Label" parent="UI/HBoxContainer" unique_id=1563692466]
+custom_minimum_size = Vector2(23.2, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_1iebi")
+theme_override_font_sizes/font_size = 10
+text = "HP:"
+
+[node name="HealthCounterLabel" parent="UI/HBoxContainer" unique_id=1755280649 instance=ExtResource("12_a8y0u")]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="PaddingRight" type="Control" parent="UI/HBoxContainer" unique_id=25667657]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+
+[node name="BottomRow" type="HBoxContainer" parent="UI" unique_id=13051551]
+custom_minimum_size = Vector2(0, 28.115)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 66.0
+offset_bottom = 9.999985
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="PaddingLeft2" type="Control" parent="UI/BottomRow" unique_id=1174969972]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+
+[node name="JumpsLabel" type="Label" parent="UI/BottomRow" unique_id=1040875358]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("10_1iebi")
+theme_override_font_sizes/font_size = 10
+text = "Jumps:"
+
+[node name="JumpsCountLabel" type="Label" parent="UI/BottomRow" unique_id=1331803262]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("10_1iebi")
+theme_override_font_sizes/font_size = 10
+text = "3"
 
 [node name="Backgrounds" type="Node2D" parent="." unique_id=82810897]
 script = ExtResource("2_7hyy1")
@@ -244,89 +344,19 @@ autostart = true
 [node name="ScoreTimer" type="Timer" parent="." unique_id=615522931]
 autostart = true
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1914927946]
-script = ExtResource("3_kks2r")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI" unique_id=287753079]
-root_node = NodePath("../HBoxContainer")
-libraries/ = SubResource("AnimationLibrary_jkv2x")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=663219286]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 24.0
-grow_horizontal = 2
-alignment = 1
-
-[node name="PaddingLeft" type="Control" parent="UI/HBoxContainer" unique_id=1039841511]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-
-[node name="ScoreLabel" type="Label" parent="UI/HBoxContainer" unique_id=882533005]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_1iebi")
-theme_override_font_sizes/font_size = 10
-text = "Score: 0"
-
-[node name="SpaceBetweenGap" type="Control" parent="UI/HBoxContainer" unique_id=1859405959]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HealthLabel" type="Label" parent="UI/HBoxContainer" unique_id=1563692466]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_1iebi")
-theme_override_font_sizes/font_size = 10
-text = "HP:"
-
-[node name="HealthCounterLabel" parent="UI/HBoxContainer" unique_id=1386851978 instance=ExtResource("12_a8y0u")]
-layout_mode = 2
-
-[node name="PaddingRight" type="Control" parent="UI/HBoxContainer" unique_id=25667657]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-
-[node name="BottomRow" type="HBoxContainer" parent="UI" unique_id=13051551]
-custom_minimum_size = Vector2(0, 28.115)
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -27.0
-offset_right = 66.0
-offset_bottom = 9.999985
-grow_vertical = 0
-size_flags_vertical = 8
-
-[node name="PaddingLeft2" type="Control" parent="UI/BottomRow" unique_id=1174969972]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-
-[node name="JumpsLabel" type="Label" parent="UI/BottomRow" unique_id=1040875358]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("10_1iebi")
-theme_override_font_sizes/font_size = 10
-text = "Jumps:"
-
-[node name="JumpsCountLabel" type="Label" parent="UI/BottomRow" unique_id=1331803262]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("10_1iebi")
-theme_override_font_sizes/font_size = 10
-text = "3"
-
 [node name="DangerArea" parent="." unique_id=1867493403 instance=ExtResource("4_f8dj5")]
 position = Vector2(-15, 31)
 direction = "Left"
 
 [node name="CollisionShape2D" parent="DangerArea" index="0"]
-position = Vector2(-60, 0)
+position = Vector2(-60, -92.5)
 
 [node name="DangerArea2" parent="." unique_id=936601969 instance=ExtResource("4_f8dj5")]
 position = Vector2(313, 25)
 direction = "Right"
 
 [node name="CollisionShape2D" parent="DangerArea2" index="0"]
-position = Vector2(46, 38.5)
+position = Vector2(46, -92.5)
 shape = SubResource("RectangleShape2D_v7aa5")
 
 [node name="DangerArea3" parent="." unique_id=1303292364 instance=ExtResource("4_f8dj5")]
@@ -359,9 +389,11 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_iwhqu")
 centered = false
 
+[connection signal="pressed" from="EndGameMenu/VBoxContainer/RestartButton" to="EndGameMenu" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="EndGameMenu/VBoxContainer/EndButton" to="EndGameMenu" method="_on_end_button_pressed"]
+[connection signal="increase_difficulty" from="UI" to="." method="_on_ui_increase_difficulty"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
-[connection signal="increase_difficulty" from="UI" to="." method="_on_ui_increase_difficulty"]
 
 [editable path="DangerArea"]
 [editable path="DangerArea2"]

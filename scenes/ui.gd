@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var jumps_count_label = $BottomRow/JumpsCountLabel
 @onready var animation_player = $AnimationPlayer
 @onready var health_counter_label: Label = $HBoxContainer/HealthCounterLabel
+@onready var score_counter_label: Label = $HBoxContainer/ScoreCounterLabel
 
 const GLITCH_INSIDE = preload("res://assets/fonts/Glitch inside.otf")
 const AIRPLANES_IN_THE_NIGHT_SKY = preload("res://assets/fonts/Airplanes in the Night Sky.ttf")
@@ -19,10 +20,13 @@ func _ready():
 	Events.connect("players_health_changed", _on_players_health_changed)
 	Events.connect("change_realities", _on_change_reality)
 	Events.connect("players_jump_count_changed", _on_players_jump_count_changed)
-	
-	health_counter_label.set_text("10")
+	Events.connect("set_health", _on_set_health)
 	
 	set_font_based_on_reality(Events.current_reality)
+	
+
+func _on_set_health(health: int):
+	health_counter_label.set_text(str(health))
 		
 		
 func _on_change_reality(): 
@@ -30,21 +34,17 @@ func _on_change_reality():
 		
 		
 func set_font_based_on_reality(reality: bool):
-	if reality:
-		score_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
-		health_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
-		jumps_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
-		jumps_count_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
-		health_counter_label.add_theme_font_override("font", AIRPLANES_IN_THE_NIGHT_SKY)
-		
-	else: 
-		score_label.add_theme_font_override("font", GLITCH_INSIDE)
-		health_label.add_theme_font_override("font", GLITCH_INSIDE)
-		jumps_label.add_theme_font_override("font", GLITCH_INSIDE)
-		jumps_count_label.add_theme_font_override("font", GLITCH_INSIDE)	
-		health_counter_label.add_theme_font_override("font", GLITCH_INSIDE)
-		
+	var font
+	if reality: font = AIRPLANES_IN_THE_NIGHT_SKY
+	else: font = GLITCH_INSIDE
 
+	score_label.add_theme_font_override("font", font)
+	health_label.add_theme_font_override("font", font)
+	jumps_label.add_theme_font_override("font", font)
+	jumps_count_label.add_theme_font_override("font", font)
+	health_counter_label.add_theme_font_override("font", font)
+	score_counter_label.add_theme_font_override("font", font)
+	
 
 func _on_players_health_changed(change: int): 
 	health_counter_label.set_text(str(change))
@@ -67,9 +67,12 @@ func _on_players_jump_count_changed(jump_count: int):
 
 func increase_score(): 
 	score += 1
-	score_label.text = "Score: " + str(score)
+	score_counter_label.text = str(score)
 	
 	if score % 15 == 0: 
 		increase_difficulty.emit() 
+	
+	if score % 25 == 0: 
+		score_counter_label.flash_green()
 		
 	

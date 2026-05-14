@@ -10,14 +10,16 @@ const JUMP_VELOCITY = -400.0
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var fastfall_timer: Timer = $FastfallTimer
+@onready var health_component = $HealthComponent
+
 
 var reality: bool = true
-var max_hp: int = 3
-var hp: int = 3
 
 
 func _ready():
 	health_component.connect("died", _on_died)
+	Events.set_health.emit(health_component.current_health)
+	
 	
 	if Events.current_reality: animation_player.play("warm_idle")
 	else: animation_player.play("cool_idle")
@@ -26,7 +28,8 @@ func _ready():
 	
 
 # Died. 
-func _on_died(): 
+func _on_died():
+	Events.game_over.emit()
 	queue_free() 
 
 
@@ -70,6 +73,7 @@ func _on_jump_component_jumped() -> void:
 	Events.change_realities.emit() 
 	Events.players_jump_count_changed.emit(jump_component.jumps) 
 	
+	
 	# Switch reality character sprite.
 	if Events.current_reality: 
 		animation_player.play("warm_idle")
@@ -78,14 +82,13 @@ func _on_jump_component_jumped() -> void:
 		
 		
 	
-	
-@onready var health_component = $HealthComponent
-func _on_hurtbox_hit() -> void:
-	velocity.y = -300
-	health_component.change_health(-1)
-	# NOTE: Could be bugged.
-	jump_component.restore_jumps()
-	Events.screen_shake.emit()
+# Removed because no more enemies
+#func _on_hurtbox_hit() -> void:
+	#velocity.y = -300
+	#health_component.change_health(-1)
+	## NOTE: Could be bugged.
+	#jump_component.restore_jumps()
+	#Events.screen_shake.emit()
 
 
 # Hacky stupid way of registering getting hit by a danger area. 
@@ -94,6 +97,8 @@ func danger_area_hit():
 	health_component.change_health(-1)
 	Events.screen_shake.emit()
 	fastfall_timer.start()
+	velocity_component.is_hovering = false
+	
 
 func _on_jump_component_jumps_restored():
 	Events.players_jump_count_changed.emit(jump_component.total_jumps)
