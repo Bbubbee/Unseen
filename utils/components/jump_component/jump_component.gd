@@ -15,6 +15,9 @@ var can_jump_from_ground := false
 signal jumped
 signal jumps_restored  # Made this to couple proof.
 
+var landed: bool
+signal i_have_landed
+
 
 func _ready():
 	if not actor:
@@ -26,6 +29,13 @@ func handle_jump():
 	if actor.is_on_floor():
 		can_jump_from_ground = true
 		restore_jumps()
+		
+		# Player has landed on the ground.
+		if not landed:
+			landed = true
+			i_have_landed.emit()
+	else:
+		landed = false
 	
 	if not actor.is_on_floor() and coyote_timer.is_stopped():
 		coyote_timer.start(coyote_time)

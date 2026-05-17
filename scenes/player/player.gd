@@ -4,6 +4,12 @@ class_name Player
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+# Audio
+@onready var jump: AudioStreamPlayer2D = $Audio/Jump
+@onready var landed: AudioStreamPlayer2D = $Audio/Landed
+@onready var damaged: AudioStreamPlayer2D = $Audio/Damaged
+@onready var footsteps: AudioStreamPlayer2D = $Audio/Footsteps
+
 
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 @onready var jump_component: JumpComponent = $JumpComponent
@@ -29,7 +35,11 @@ func _ready():
 
 # Died. 
 func _on_died():
+	sprite_2d.set_visible(false)
+	await damaged.finished
 	Events.game_over.emit()
+	
+	
 	queue_free() 
 
 
@@ -38,8 +48,20 @@ func _physics_process(delta: float) -> void:
 
 	# Movement	
 	var direction = Input.get_axis("left", "right")
-	if direction: velocity_component.move(delta, direction)
-	else: velocity_component.stop(delta)
+	if direction: 
+		velocity_component.move(delta, direction)
+		
+		# Player is on the ground. 
+		if self.velocity.y == 0 and not footsteps.playing: 
+			footsteps.play()
+		#else: 
+			#footsteps.stop()
+
+	
+	else: 
+		velocity_component.stop(delta)
+		footsteps.stop()
+		
 	
 	# Face sprite towards direction moved
 	if direction != 0: sprite_2d.flip_h = direction < 0 
@@ -69,6 +91,7 @@ func _input(event: InputEvent) -> void:
 
 # The player has successfully jumped! Change realites.
 func _on_jump_component_jumped() -> void:
+	jump.play()
 	Events.current_reality = not Events.current_reality
 	Events.change_realities.emit() 
 	Events.players_jump_count_changed.emit(jump_component.jumps) 
@@ -98,7 +121,13 @@ func danger_area_hit():
 	Events.screen_shake.emit()
 	fastfall_timer.start()
 	velocity_component.is_hovering = false
+	damaged.play()
+	
 	
 
 func _on_jump_component_jumps_restored():
 	Events.players_jump_count_changed.emit(jump_component.total_jumps)
+
+
+func _on_jump_component_i_have_landed() -> void:
+	landed.play()
