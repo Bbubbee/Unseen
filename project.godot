@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 Events="*res://utils/globals/events.gd"
 SceneTransition="*uid://dul4q3hipfgei"
+Helper="*uid://deef0tgoj53wk"
 
 [display]
 
@@ -74,6 +75,7 @@ up={
 2d_physics/layer_1="world"
 2d_physics/layer_2="player"
 2d_physics/layer_3="enemy"
+2d_physics/layer_4="health"
 
 [rendering]
 

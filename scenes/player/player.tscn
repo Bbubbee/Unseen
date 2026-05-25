@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://070nxyjvasee" path="res://assets/audio/sfx/thud.mp3" id="8_qek5x"]
 [ext_resource type="AudioStream" uid="uid://im7tm02gw4pi" path="res://assets/audio/sfx/hurt.mp3" id="9_5gtgg"]
 [ext_resource type="AudioStream" uid="uid://dpt467yjwmtum" path="res://assets/audio/sfx/thud_footsteps.mp3" id="9_h17s1"]
+[ext_resource type="AudioStream" uid="uid://coemnwyuhiomq" path="res://assets/audio/sfx/increase_health.mp3" id="11_je7p5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wv7ju"]
 atlas = ExtResource("2_cnjuq")
@@ -19,8 +20,8 @@ region = Rect2(48, 64, 32, 32)
 radius = 6.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2pl2u"]
-radius = 6.0
-height = 20.0
+radius = 11.0
+height = 42.0
 
 [sub_resource type="Animation" id="Animation_oxi6t"]
 length = 0.001
@@ -78,6 +79,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" unique_id=1450151552]
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_y4u3j")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=863214871]
@@ -89,19 +91,20 @@ shape = SubResource("CapsuleShape2D_re6wi")
 debug_color = Color(0.180027, 0.638579, 0.219221, 0.42)
 
 [node name="Hurtbox" parent="." unique_id=300971075 instance=ExtResource("2_shyob")]
-collision_mask = 4
+collision_mask = 12
 
 [node name="Collider" parent="Hurtbox" index="0"]
 shape = SubResource("CapsuleShape2D_2pl2u")
 
 [node name="VelocityComponent" parent="." unique_id=1518019178 node_paths=PackedStringArray("actor") instance=ExtResource("3_5fbal")]
 actor = NodePath("..")
-acceleration = 1800.0
+speed = 230.0
+acceleration = 1850.0
 friction = 1800.0
 
 [node name="JumpComponent" parent="." unique_id=410769349 node_paths=PackedStringArray("actor") instance=ExtResource("4_p1a2g")]
 actor = NodePath("..")
-jump_force = -400.0
+jump_force = -375.0
 coyote_time = 0.18
 total_jumps = 3
 
@@ -133,7 +136,11 @@ parameters/looping = true
 [node name="Damaged" type="AudioStreamPlayer2D" parent="Audio" unique_id=1049669930]
 stream = ExtResource("9_5gtgg")
 
-[connection signal="hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]
+[node name="IncreaseHealth" type="AudioStreamPlayer2D" parent="Audio" unique_id=1401275344]
+stream = ExtResource("11_je7p5")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="i_have_landed" from="JumpComponent" to="." method="_on_jump_component_i_have_landed"]
 [connection signal="jumped" from="JumpComponent" to="." method="_on_jump_component_jumped"]
 [connection signal="jumps_restored" from="JumpComponent" to="." method="_on_jump_component_jumps_restored"]

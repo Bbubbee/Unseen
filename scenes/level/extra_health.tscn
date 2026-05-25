@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cjhduto5clmi8"]
+
+[ext_resource type="Script" uid="uid://be5e1we1ir46h" path="res://scenes/level/extra_health.gd" id="1_wo528"]
+[ext_resource type="Script" uid="uid://cu0l6h7i8l3im" path="res://scenes/level/hitbox_area.gd" id="2_p1cv7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wo528"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3j8x"]
+radius = 8.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_i3j8x"]
+
+[node name="ExtraHealth" type="RigidBody2D" unique_id=1075951439]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+linear_velocity = Vector2(-75, 0)
+script = ExtResource("1_wo528")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1279020003]
+shape = SubResource("CircleShape2D_wo528")
+debug_color = Color(0.4765625, 0, 0, 0.41960785)
+
+[node name="HitboxArea" type="Area2D" parent="." unique_id=1962222907]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_p1cv7")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="HitboxArea" unique_id=217573849]
+shape = SubResource("CircleShape2D_i3j8x")
+
+[node name="TextureRect" type="TextureRect" parent="HitboxArea/CollisionShape" unique_id=2051605313]
+offset_left = -5.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 5.0
+texture = SubResource("PlaceholderTexture2D_i3j8x")
+
+[connection signal="touched_by_player" from="HitboxArea" to="." method="_on_hitbox_area_touched_by_player"]

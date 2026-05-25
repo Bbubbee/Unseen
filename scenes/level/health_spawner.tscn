@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://qtbghkj4y3so"]
+
+[ext_resource type="Script" uid="uid://ctpcsr17ld2nq" path="res://scenes/level/health_spawner.gd" id="1_v8kdr"]
+
+[node name="HealthSpawner" type="Node2D" unique_id=516024548]
+script = ExtResource("1_v8kdr")

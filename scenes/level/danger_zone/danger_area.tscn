@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://t3raceuivu7d"]
+[gd_scene format=3 uid="uid://t3raceuivu7d"]
 
-[ext_resource type="Script" path="res://scenes/level/danger_zone/danger_area.gd" id="1_77hmh"]
+[ext_resource type="Script" uid="uid://bduhy15s1tff0" path="res://scenes/level/danger_zone/danger_area.gd" id="1_77hmh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pm5x"]
 size = Vector2(26.345, 300)
 
-[node name="DangerArea" type="Area2D"]
+[node name="DangerArea" type="Area2D" unique_id=1589418952]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_77hmh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2041632438]
 shape = SubResource("RectangleShape2D_6pm5x")
 debug_color = Color(0.84937, 0.333084, 0.450036, 0.42)
 

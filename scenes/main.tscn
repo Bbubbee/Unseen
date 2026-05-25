@@ -15,6 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://dovxmrr588pu0" path="res://assets/cool_background/2.png" id="8_iwhqu"]
 [ext_resource type="FontFile" uid="uid://bdyy8n27fqbwq" path="res://assets/fonts/Glitch inside.otf" id="10_1iebi"]
 [ext_resource type="PackedScene" uid="uid://ccxall4mjpoaa" path="res://scenes/ui/counter_label.tscn" id="12_a8y0u"]
+[ext_resource type="AudioStream" uid="uid://duog5liu3p6fv" path="res://assets/audio/sfx/wind_loop.mp3" id="16_jbj1t"]
+[ext_resource type="AudioStream" uid="uid://c0l8j24jw1jvd" path="res://assets/audio/music/skylight-simon-folwar-main-version-25232-03-28.mp3" id="17_muem4"]
+[ext_resource type="PackedScene" uid="uid://cjhduto5clmi8" path="res://scenes/level/extra_health.tscn" id="18_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://qtbghkj4y3so" path="res://scenes/level/health_spawner.tscn" id="19_0ld40"]
 
 [sub_resource type="Animation" id="Animation_trceg"]
 length = 0.001
@@ -141,6 +145,7 @@ size = Vector2(625, 20)
 
 [node name="Main" type="Node2D" unique_id=2001072222]
 script = ExtResource("1_papdv")
+chance_to_change_reality = 89
 
 [node name="EndGameMenu" type="CanvasLayer" parent="." unique_id=1356544906]
 script = ExtResource("2_jkv2x")
@@ -348,14 +353,14 @@ autostart = true
 position = Vector2(-15, 31)
 direction = "Left"
 
-[node name="CollisionShape2D" parent="DangerArea" index="0"]
+[node name="CollisionShape2D" parent="DangerArea" index="0" unique_id=2041632438]
 position = Vector2(-60, -92.5)
 
 [node name="DangerArea2" parent="." unique_id=936601969 instance=ExtResource("4_f8dj5")]
 position = Vector2(313, 25)
 direction = "Right"
 
-[node name="CollisionShape2D" parent="DangerArea2" index="0"]
+[node name="CollisionShape2D" parent="DangerArea2" index="0" unique_id=2041632438]
 position = Vector2(46, -92.5)
 shape = SubResource("RectangleShape2D_v7aa5")
 
@@ -363,7 +368,7 @@ shape = SubResource("RectangleShape2D_v7aa5")
 position = Vector2(118, 182)
 direction = "Bottom"
 
-[node name="CollisionShape2D" parent="DangerArea3" index="0"]
+[node name="CollisionShape2D" parent="DangerArea3" index="0" unique_id=2041632438]
 shape = SubResource("RectangleShape2D_yyh3o")
 
 [node name="CameraScreenShake" parent="." unique_id=94778179 instance=ExtResource("6_6giow")]
@@ -389,9 +394,26 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_iwhqu")
 centered = false
 
+[node name="AudioNodes" type="Node2D" parent="." unique_id=1471429672]
+
+[node name="WindLoop" type="AudioStreamPlayer2D" parent="AudioNodes" unique_id=1231367622]
+stream = ExtResource("16_jbj1t")
+autoplay = true
+parameters/looping = true
+
+[node name="BGMusic" type="AudioStreamPlayer2D" parent="AudioNodes" unique_id=907116094]
+stream = ExtResource("17_muem4")
+autoplay = true
+
+[node name="ExtraHealth" parent="." unique_id=1962222907 instance=ExtResource("18_dp3eg")]
+position = Vector2(94, 117)
+
+[node name="HealthSpawner" parent="." unique_id=516024548 instance=ExtResource("19_0ld40")]
+
 [connection signal="pressed" from="EndGameMenu/VBoxContainer/RestartButton" to="EndGameMenu" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="EndGameMenu/VBoxContainer/EndButton" to="EndGameMenu" method="_on_end_button_pressed"]
 [connection signal="increase_difficulty" from="UI" to="." method="_on_ui_increase_difficulty"]
+[connection signal="spawn_health" from="UI" to="HealthSpawner" method="spawn_health"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 

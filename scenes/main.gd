@@ -6,6 +6,8 @@ const ENEMY = preload("res://scenes/enemy/enemy.tscn")
 # Variables. 
 @onready var screen_size = get_viewport_rect().size
 
+@export var chance_to_change_reality: int
+
 
 var platform_reality = true
 var platform_speed: float = 200
@@ -25,7 +27,8 @@ var last_platform: Platform
 
 func _ready() -> void:
 	Events.connect("change_realities", _on_change_reality)
-
+	Events.connect("game_over", _on_game_over)
+	
 
 func _process(_delta):
 	if last_platform:
@@ -53,9 +56,9 @@ func spawn_platform():
 		# There is a previous platform.
 		var previous_platform: Platform = platforms.get_child(platforms.get_child_count()-1)
 		
-		# 80% chance of being the opposite reality.
+		# Determine the chances of being the opposite reality. 
 		var chance = randi_range(0, 100)
-		if chance > 80:
+		if chance > chance_to_change_reality:
 			reality = previous_platform.reality
 		else:
 			reality = not previous_platform.reality
@@ -75,42 +78,13 @@ func spawn_platform():
 		p.set_visibility(false)
 
 # Flip the reality when a player jumps. 
-func _on_change_reality() -> void:
-	#current_reality = not current_reality  # Flip the realties.
-	
-	
+func _on_change_reality() -> void:	
 	# Make the new reality visible.	
 	for p: Platform in platforms.get_children():
 		if p.reality == Events.current_reality:
 			p.set_visibility(true)
 		else:
 			p.set_visibility(false)
-	
-	#for e in enemies.get_children():
-		#if e.reality == current_reality:
-			#e.set_visibility(true)
-		#else:
-			#e.set_visibility(false)
-			
-# NOTE: Removed 
-#func _on_enemy_timer_timeout() -> void:
-	#return
-	#enemy_timer.start()
-	#
-	#var rand_y = get_random_height()
-	#var e = ENEMY.instantiate()
-	#enemies.add_child(e)
-	#e.position = Vector2(screen_size.x, rand_y)
-	#
-	#e.init(platform_reality)
-	#e.linear_velocity.x = -150
-	#
-	## Make the platform visible if its it's reality. 
-	#if e.reality == Events.current_reality:
-		#e.set_visibility(true)
-	#else:
-		#e.set_visibility(false)
-	
 
 
 # Choose a random height based on the size of the screen.
@@ -127,8 +101,12 @@ func _on_score_timer_timeout() -> void:
 	score_timer.start()
 	ui.increase_score()
 	
+	# Communicate to health spawner.
 	
 	
+	
+func _on_game_over(): 
+	score_timer.stop()
 
 
 # Increase difficulty by increasing the speed of the platforms.

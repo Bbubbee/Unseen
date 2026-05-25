@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://swdlvi4px611"]
+
+[ext_resource type="Script" uid="uid://4u8313jvjt5o" path="res://scenes/player/player.gd" id="1_y4u3j"]
+[ext_resource type="Texture2D" uid="uid://qj87s0ewl3bj" path="res://scenes/tilemap/unseen-characters-Sheet.png" id="2_cnjuq"]
+[ext_resource type="PackedScene" uid="uid://bmqdf4kabond7" path="res://utils/components/hurtbox_component/hurtbox.tscn" id="2_shyob"]
+[ext_resource type="PackedScene" uid="uid://dtg7dr1jl4ced" path="res://utils/components/velocity_component/velocity_component.tscn" id="3_5fbal"]
+[ext_resource type="PackedScene" uid="uid://hgfcjwgpa70n" path="res://utils/components/jump_component/jump_component.tscn" id="4_p1a2g"]
+[ext_resource type="PackedScene" uid="uid://cy3aryyn22ci5" path="res://utils/components/health_component/health_component.tscn" id="5_xebif"]
+[ext_resource type="AudioStream" uid="uid://v1j4spma5kt2" path="res://assets/audio/sfx/jump.mp3" id="7_0owmy"]
+[ext_resource type="AudioStream" uid="uid://070nxyjvasee" path="res://assets/audio/sfx/thud.mp3" id="8_qek5x"]
+[ext_resource type="AudioStream" uid="uid://im7tm02gw4pi" path="res://assets/audio/sfx/hurt.mp3" id="9_5gtgg"]
+[ext_resource type="AudioStream" uid="uid://dpt467yjwmtum" path="res://assets/audio/sfx/thud_footsteps.mp3" id="9_h17s1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv7ju"]
+atlas = ExtResource("2_cnjuq")
+region = Rect2(48, 64, 32, 32)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_re6wi"]
+radius = 6.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2pl2u"]
+radius = 6.0
+height = 20.0
+
+[sub_resource type="Animation" id="Animation_oxi6t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(48, 64, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_a66kd"]
+resource_name = "cool_idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(0, 64, 32, 32), Rect2(320, 64, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_ai8ob"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(48, 64, 32, 32), Rect2(368, 64, 32, 32)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q25dt"]
+_data = {
+&"RESET": SubResource("Animation_oxi6t"),
+&"cool_idle": SubResource("Animation_a66kd"),
+&"warm_idle": SubResource("Animation_ai8ob")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=1450151552]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_y4u3j")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=863214871]
+texture = SubResource("AtlasTexture_wv7ju")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1827255197]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_re6wi")
+debug_color = Color(0.180027, 0.638579, 0.219221, 0.42)
+
+[node name="Hurtbox" parent="." unique_id=300971075 instance=ExtResource("2_shyob")]
+collision_mask = 12
+
+[node name="Collider" parent="Hurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_2pl2u")
+
+[node name="VelocityComponent" parent="." unique_id=1518019178 node_paths=PackedStringArray("actor") instance=ExtResource("3_5fbal")]
+actor = NodePath("..")
+speed = 230.0
+acceleration = 1850.0
+friction = 1800.0
+
+[node name="JumpComponent" parent="." unique_id=410769349 node_paths=PackedStringArray("actor") instance=ExtResource("4_p1a2g")]
+actor = NodePath("..")
+jump_force = -375.0
+coyote_time = 0.18
+total_jumps = 3
+
+[node name="HealthComponent" parent="." unique_id=1183750042 instance=ExtResource("5_xebif")]
+max_health = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1105233251]
+libraries/ = SubResource("AnimationLibrary_q25dt")
+autoplay = &"cool_idle"
+
+[node name="FastfallTimer" type="Timer" parent="." unique_id=581189886]
+wait_time = 0.15
+one_shot = true
+
+[node name="Audio" type="Node2D" parent="." unique_id=795777262]
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Audio" unique_id=880355501]
+stream = ExtResource("7_0owmy")
+
+[node name="Landed" type="AudioStreamPlayer2D" parent="Audio" unique_id=1478183606]
+stream = ExtResource("8_qek5x")
+
+[node name="Footsteps" type="AudioStreamPlayer2D" parent="Audio" unique_id=1344641630]
+stream = ExtResource("9_h17s1")
+volume_db = -15.0
+pitch_scale = 1.08
+parameters/looping = true
+
+[node name="Damaged" type="AudioStreamPlayer2D" parent="Audio" unique_id=1049669930]
+stream = ExtResource("9_5gtgg")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="i_have_landed" from="JumpComponent" to="." method="_on_jump_component_i_have_landed"]
+[connection signal="jumped" from="JumpComponent" to="." method="_on_jump_component_jumped"]
+[connection signal="jumps_restored" from="JumpComponent" to="." method="_on_jump_component_jumps_restored"]
+[connection signal="timeout" from="FastfallTimer" to="." method="_on_fastfall_timer_timeout"]
+
+[editable path="Hurtbox"]

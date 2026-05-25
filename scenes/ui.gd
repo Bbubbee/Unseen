@@ -14,6 +14,7 @@ const AIRPLANES_IN_THE_NIGHT_SKY = preload("res://assets/fonts/Airplanes in the 
 var score = 0 
 
 signal increase_difficulty 
+signal spawn_health 
 
 
 func _ready():
@@ -47,8 +48,14 @@ func set_font_based_on_reality(reality: bool):
 	
 
 func _on_players_health_changed(change: int): 
+	var old_health_count = int(health_counter_label.text)
 	health_counter_label.set_text(str(change))
-	health_counter_label.flash_red()
+	
+	if old_health_count > change:
+		health_counter_label.flash_red()
+	elif old_health_count < change:
+		health_counter_label.flash_green()
+		
 	
 	
 func _on_players_jump_count_changed(jump_count: int):
@@ -74,5 +81,10 @@ func increase_score():
 	
 	if score % 25 == 0: 
 		score_counter_label.flash_green()
-		
+		spawn_health.emit()
 	
+
+	
+	
+		
+		
