@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://swdlvi4px611" path="res://scenes/player/player.tscn" id="1_x38uj"]
 [ext_resource type="PackedScene" uid="uid://tip86uatudk0" path="res://utils/components/camera_screen_shake/camera_screen_shake.tscn" id="3_mpro5"]
-[ext_resource type="PackedScene" uid="uid://cjhduto5clmi8" path="res://scenes/level/extra_health.tscn" id="4_51e2l"]
+[ext_resource type="PackedScene" uid="uid://cjhduto5clmi8" path="res://scenes/level/extra_health/extra_health.tscn" id="4_51e2l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qapw3"]
 size = Vector2(573, 45)

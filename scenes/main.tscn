@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://ccxall4mjpoaa" path="res://scenes/ui/counter_label.tscn" id="12_a8y0u"]
 [ext_resource type="AudioStream" uid="uid://duog5liu3p6fv" path="res://assets/audio/sfx/wind_loop.mp3" id="16_jbj1t"]
 [ext_resource type="AudioStream" uid="uid://c0l8j24jw1jvd" path="res://assets/audio/music/skylight-simon-folwar-main-version-25232-03-28.mp3" id="17_muem4"]
-[ext_resource type="PackedScene" uid="uid://cjhduto5clmi8" path="res://scenes/level/extra_health.tscn" id="18_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://cjhduto5clmi8" path="res://scenes/level/extra_health/extra_health.tscn" id="18_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://qtbghkj4y3so" path="res://scenes/level/health_spawner.tscn" id="19_0ld40"]
 
 [sub_resource type="Animation" id="Animation_trceg"]
