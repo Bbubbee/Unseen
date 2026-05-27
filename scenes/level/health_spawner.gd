@@ -20,5 +20,5 @@ func spawn_health() -> void:
 	
 	var extra_health = EXTRA_HEALTH.instantiate() as Health
 	var rand_y = Helper.get_random_height_on_screen(screen_size.y, 20)
-	extra_health.position = Vector2(screen_size.x-40, rand_y)
+	extra_health.position = Vector2(screen_size.x, rand_y)
 	self.add_child(extra_health)
