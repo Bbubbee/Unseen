@@ -10,11 +10,14 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_i3j8x"]
 radius = 8.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o3xwr"]
+particle_flag_disable_z = true
+gravity = Vector3(50, 0, 0)
+
 [node name="ExtraHealth" type="RigidBody2D" unique_id=1075951439]
 collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
-linear_velocity = Vector2(-150, 0)
 script = ExtResource("1_wo528")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1279020003]
@@ -31,5 +34,9 @@ shape = SubResource("CircleShape2D_i3j8x")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=160022640]
 texture = ExtResource("3_o3xwr")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1714531456]
+texture = ExtResource("3_o3xwr")
+process_material = SubResource("ParticleProcessMaterial_o3xwr")
 
 [connection signal="touched_by_player" from="HitboxArea" to="." method="_on_hitbox_area_touched_by_player"]
