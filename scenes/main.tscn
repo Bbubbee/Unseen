@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://ccxall4mjpoaa" path="res://scenes/ui/counter_label.tscn" id="12_a8y0u"]
 [ext_resource type="AudioStream" uid="uid://duog5liu3p6fv" path="res://assets/audio/sfx/wind_loop.mp3" id="16_jbj1t"]
 [ext_resource type="AudioStream" uid="uid://c0l8j24jw1jvd" path="res://assets/audio/music/skylight-simon-folwar-main-version-25232-03-28.mp3" id="17_muem4"]
-[ext_resource type="PackedScene" uid="uid://cjhduto5clmi8" path="res://scenes/level/extra_health/extra_health.tscn" id="18_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://qtbghkj4y3so" path="res://scenes/level/health_spawner.tscn" id="19_0ld40"]
 
 [sub_resource type="Animation" id="Animation_trceg"]
@@ -138,7 +137,7 @@ _data = {
 size = Vector2(573, 38.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7aa5"]
-size = Vector2(34, 465)
+size = Vector2(34, 688)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyh3o"]
 size = Vector2(625, 20)
@@ -350,18 +349,15 @@ autostart = true
 autostart = true
 
 [node name="DangerArea" parent="." unique_id=1867493403 instance=ExtResource("4_f8dj5")]
-position = Vector2(-15, 31)
+position = Vector2(-70, 53)
 direction = "Left"
-
-[node name="CollisionShape2D" parent="DangerArea" index="0" unique_id=2041632438]
-position = Vector2(-60, -92.5)
 
 [node name="DangerArea2" parent="." unique_id=936601969 instance=ExtResource("4_f8dj5")]
 position = Vector2(313, 25)
 direction = "Right"
 
 [node name="CollisionShape2D" parent="DangerArea2" index="0" unique_id=2041632438]
-position = Vector2(46, -92.5)
+position = Vector2(42, -153)
 shape = SubResource("RectangleShape2D_v7aa5")
 
 [node name="DangerArea3" parent="." unique_id=1303292364 instance=ExtResource("4_f8dj5")]
@@ -404,9 +400,6 @@ parameters/looping = true
 [node name="BGMusic" type="AudioStreamPlayer2D" parent="AudioNodes" unique_id=907116094]
 stream = ExtResource("17_muem4")
 autoplay = true
-
-[node name="ExtraHealth" parent="." unique_id=1962222907 instance=ExtResource("18_dp3eg")]
-position = Vector2(94, 117)
 
 [node name="HealthSpawner" parent="." unique_id=516024548 instance=ExtResource("19_0ld40")]
 

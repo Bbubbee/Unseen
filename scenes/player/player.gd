@@ -9,7 +9,6 @@ const JUMP_VELOCITY = -400.0
 @onready var landed: AudioStreamPlayer2D = $Audio/Landed
 @onready var damaged: AudioStreamPlayer2D = $Audio/Damaged
 @onready var footsteps: AudioStreamPlayer2D = $Audio/Footsteps
-@onready var increase_health: AudioStreamPlayer2D = $Audio/IncreaseHealth
 
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 @onready var jump_component: JumpComponent = $JumpComponent
@@ -129,7 +128,6 @@ func _on_hurtbox_area_entered(area: HealthHitbox) -> void:
 		health_component.change_health(+1)
 		area.touched_by_player.emit()
 		self.velocity.y = -350
-		increase_health.play()
 		
 
 	

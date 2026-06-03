@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cvtpoao816yta"]
 
 [ext_resource type="Script" uid="uid://2kwagh0eidha" path="res://scenes/menus/main_menu.gd" id="1_8trlw"]
+[ext_resource type="FontFile" uid="uid://jphahq3f4s5s" path="res://assets/fonts/Airplanes in the Night Sky.ttf" id="2_ovrgc"]
 
 [node name="MainMenu" type="Control" unique_id=1031634889]
 layout_mode = 3
@@ -22,12 +23,14 @@ alignment = 1
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=1810353346]
 layout_mode = 2
-text = "Main Menu"
+theme_override_fonts/font = ExtResource("2_ovrgc")
+text = "Unseen"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="VBoxContainer" unique_id=733304451]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Start Game"
+theme_override_fonts/font = ExtResource("2_ovrgc")
+text = "Start"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://be5e1we1ir46h" path="res://scenes/level/extra_health/extra_health.gd" id="1_wo528"]
 [ext_resource type="Script" uid="uid://cu0l6h7i8l3im" path="res://scenes/level/hitbox_area.gd" id="2_p1cv7"]
 [ext_resource type="Texture2D" uid="uid://dgfpwlqifhg6b" path="res://scenes/level/extra_health/shooting_star.png" id="3_o3xwr"]
+[ext_resource type="AudioStream" uid="uid://coemnwyuhiomq" path="res://assets/audio/sfx/increase_health.mp3" id="4_4g1tq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wo528"]
 radius = 6.0
@@ -11,13 +12,19 @@ radius = 6.0
 radius = 8.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o3xwr"]
+lifetime_randomness = 0.25
 particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 4.0
+angle_min = -347.6
+angle_max = -281.4
 gravity = Vector3(50, 0, 0)
 
 [node name="ExtraHealth" type="RigidBody2D" unique_id=1075951439]
 collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
+linear_velocity = Vector2(-150, 0)
 script = ExtResource("1_wo528")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1279020003]
@@ -36,7 +43,13 @@ shape = SubResource("CircleShape2D_i3j8x")
 texture = ExtResource("3_o3xwr")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1714531456]
-texture = ExtResource("3_o3xwr")
+modulate = Color(1, 0.99210775, 0.1160714, 1)
+amount = 30
+lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_o3xwr")
+
+[node name="IncreaseHealth" type="AudioStreamPlayer2D" parent="." unique_id=1537792015]
+stream = ExtResource("4_4g1tq")
+volume_db = -8.0
 
 [connection signal="touched_by_player" from="HitboxArea" to="." method="_on_hitbox_area_touched_by_player"]
