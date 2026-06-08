@@ -107,6 +107,10 @@ func _on_score_timer_timeout() -> void:
 	
 func _on_game_over(): 
 	score_timer.stop()
+	SaveLoad.save_score(ui.score)
+	ui.visible = false
+
+
 
 
 # Increase difficulty by increasing the speed of the platforms.

@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var restart_button: Button = $VBoxContainer/RestartButton
 @onready var end_button: Button = $VBoxContainer/EndButton
+@onready var highscore_label: Label = $VBoxContainer/HighscoreLabel
 
 # Fonts.
 const GLITCH_INSIDE = preload("res://assets/fonts/Glitch inside.otf")
@@ -25,8 +26,13 @@ func _on_game_over():
 		
 	restart_button.add_theme_font_override("font", font)
 	end_button.add_theme_font_override("font", font)
+	highscore_label.add_theme_font_override("font", font)
 	
 	self.visible = true
+	
+	highscore_label.text = "Highscore: " + str(SaveLoad.highest_score)
+	
+	
 	
 	
 func _on_restart_button_pressed() -> void:
