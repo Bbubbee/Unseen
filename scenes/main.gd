@@ -22,6 +22,8 @@ var platform_speed: float = 200
 @onready var cool_bg_static: ColorRect = $Backgrounds/CoolBGStatic
 @onready var warm_bg_static: ColorRect = $Backgrounds/WarmBGStatic
 @onready var starting_floor: RigidBody2D = $StartingFloor
+@onready var end_game_menu = $EndGameMenu
+@onready var tutorial_msgs_controller = $TutorialMsgsController
 
 var last_platform: Platform
 
@@ -106,11 +108,11 @@ func _on_score_timer_timeout() -> void:
 	
 	
 func _on_game_over(): 
+	tutorial_msgs_controller.queue_free()
 	score_timer.stop()
 	SaveLoad.save_score(ui.score)
 	ui.visible = false
-
-
+	end_game_menu.highscore_label.text = "Highscore: " + str(SaveLoad.highest_score)
 
 
 # Increase difficulty by increasing the speed of the platforms.
