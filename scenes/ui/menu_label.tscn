@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://djroquekgv8an"]
+
+[ext_resource type="Script" uid="uid://bxd5uqnfoj2ep" path="res://scenes/ui/menu_label.gd" id="1_euxpy"]
+
+[node name="MenuLabel" type="RichTextLabel" unique_id=114210658]
+offset_right = 69.0
+offset_bottom = 23.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "test"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_euxpy")
+
+[node name="Timer" type="Timer" parent="." unique_id=1917444342]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

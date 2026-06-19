@@ -395,7 +395,6 @@ NOISE_SHAKE_STRENGTH = 20.0
 RANDOM_SHAKE_STRENGTH = 20.0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=901146338]
-visible = false
 
 [node name="Sky" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1350254475]
 

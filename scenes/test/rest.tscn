@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://35lix6kuweuh"]
+
+[ext_resource type="Texture2D" uid="uid://bnrqnjlw3cse2" path="res://assets/warm_background/1.png" id="1_l3qds"]
+
+[node name="Rest" type="Node2D" unique_id=892738077]
+
+[node name="ParralaxBackground" type="Node2D" parent="." unique_id=991689523]
+
+[node name="Parallax2D" type="Parallax2D" parent="ParralaxBackground" unique_id=641617276]
+scroll_scale = Vector2(5, 5)
+repeat_size = Vector2(278, 0)
+autoscroll = Vector2(-50, 0)
+
+[node name="Background" type="Sprite2D" parent="ParralaxBackground/Parallax2D" unique_id=135887526]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_l3qds")
+centered = false
