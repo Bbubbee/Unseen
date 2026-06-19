@@ -371,11 +371,14 @@ autostart = true
 autostart = true
 
 [node name="DangerArea" parent="." unique_id=1867493403 instance=ExtResource("4_f8dj5")]
-position = Vector2(-70, 53)
+position = Vector2(-110, 49)
 direction = "Left"
 
+[node name="CollisionShape2D" parent="DangerArea" index="0" unique_id=2041632438]
+position = Vector2(0, -84.5)
+
 [node name="DangerArea2" parent="." unique_id=936601969 instance=ExtResource("4_f8dj5")]
-position = Vector2(313, 25)
+position = Vector2(342, 23)
 direction = "Right"
 
 [node name="CollisionShape2D" parent="DangerArea2" index="0" unique_id=2041632438]

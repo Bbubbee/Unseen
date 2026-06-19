@@ -12,3 +12,6 @@ signal players_jump_count_changed(jumps: int)
 signal set_health(health: int)
 
 signal game_over
+
+
+var has_seen_tutorial: bool = false

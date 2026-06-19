@@ -23,6 +23,12 @@ var msgs_index: int
 
 func _ready():
 	Events.connect("change_realities", _on_change_reality)
+	
+	if Events.has_seen_tutorial:
+		self.queue_free()
+	else: 
+		Events.has_seen_tutorial = true
+	
 
 func _on_change_reality(): 
 	set_font_based_on_reality(Events.current_reality)

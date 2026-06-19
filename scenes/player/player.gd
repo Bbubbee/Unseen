@@ -69,9 +69,25 @@ func _physics_process(delta: float) -> void:
 		# Only be able to hover if add the end of jump. Velocity > 0: 
 		if velocity.y > 0: 
 			velocity_component.is_hovering = true
+			
+			# Check reality
+			if Events.current_reality: 
+				animation_player.play("warm_hover")
+			else:
+				animation_player.play("cool_hover")
+				
 		else: 
 			velocity_component.is_hovering = false
+			if Events.current_reality: 
+				animation_player.play("warm_idle")
+			else:
+				animation_player.play("cool_idle")
 		
+	if Input.is_action_just_released("up"):
+		if Events.current_reality: 
+			animation_player.play("warm_idle")
+		else:
+			animation_player.play("cool_idle")
 	move_and_slide()  # Must be before handle jump. 
 	jump_component.handle_jump()
 	
@@ -120,11 +136,17 @@ func _on_jump_component_jumps_restored():
 
 func _on_jump_component_i_have_landed() -> void:
 	landed.play()
+	if Events.current_reality: 
+		animation_player.play("warm_idle")
+	else:
+		animation_player.play("cool_idle")
 
 # Hacky way of using Hurtbox to actually detect good things (extra health) 
 func _on_hurtbox_area_entered(area: HealthHitbox) -> void:
 	
 	if area is HealthHitbox:
+		velocity_component.is_hovering = false
+		
 		health_component.change_health(+1)
 		area.touched_by_player.emit()
 		self.velocity.y = -350
