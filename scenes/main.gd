@@ -108,7 +108,8 @@ func _on_score_timer_timeout() -> void:
 	
 	
 func _on_game_over(): 
-	tutorial_msgs_controller.queue_free()
+	if tutorial_msgs_controller:
+		tutorial_msgs_controller.queue_free()
 	score_timer.stop()
 	SaveLoad.save_score(ui.score)
 	ui.visible = false

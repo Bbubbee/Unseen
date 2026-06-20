@@ -188,10 +188,6 @@ layout_mode = 2
 text = "Restart
 "
 
-[node name="EndButton" type="Button" parent="EndGameMenu/VBoxContainer" unique_id=684994194]
-layout_mode = 2
-text = "End Game"
-
 [node name="HighscoreLabel" type="Label" parent="EndGameMenu/VBoxContainer" unique_id=762566812]
 layout_mode = 2
 
@@ -430,7 +426,6 @@ autoplay = true
 [connection signal="timeout" from="TutorialMsgsController/SpawnMsgTimer" to="TutorialMsgsController" method="_on_spawn_msg_timer_timeout"]
 [connection signal="timeout" from="TutorialMsgsController/DestroyMsgTimer" to="TutorialMsgsController" method="_on_destroy_msg_timer_timeout"]
 [connection signal="pressed" from="EndGameMenu/VBoxContainer/RestartButton" to="EndGameMenu" method="_on_restart_button_pressed"]
-[connection signal="pressed" from="EndGameMenu/VBoxContainer/EndButton" to="EndGameMenu" method="_on_end_button_pressed"]
 [connection signal="increase_difficulty" from="UI" to="." method="_on_ui_increase_difficulty"]
 [connection signal="spawn_health" from="UI" to="HealthSpawner" method="spawn_health"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

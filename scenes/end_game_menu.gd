@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 @onready var restart_button: Button = $VBoxContainer/RestartButton
-@onready var end_button: Button = $VBoxContainer/EndButton
 @onready var highscore_label: Label = $VBoxContainer/HighscoreLabel
 
 # Fonts.
@@ -25,7 +24,6 @@ func _on_game_over():
 		font = GLITCH_INSIDE
 		
 	restart_button.add_theme_font_override("font", font)
-	end_button.add_theme_font_override("font", font)
 	highscore_label.add_theme_font_override("font", font)
 	
 	self.visible = true
@@ -49,13 +47,11 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("up"): 
 		restart_button.grab_focus()
-	elif event.is_action_pressed("down"): 
-		end_button.grab_focus()
+
 	
 	if event.is_action_pressed("ui_accept"):
 		if restart_button.has_focus(): 
 			_on_restart_button_pressed()
-		elif end_button.has_focus():
-			_on_end_button_pressed()
+
 	
 	
